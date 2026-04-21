@@ -1,0 +1,505 @@
+{
+  "pdf": "h:\\ebk\\Bsp\\M55M1-eBook-Sample-Code-master\\Doc\\人員追蹤.pdf",
+  "page_start": 3,
+  "page_end": 47,
+  "pages": [
+    {
+      "page": 3,
+      "title_guess": "NuDeveloper Ecosystem – Make engineers’ jobs easier.",
+      "image_count": 2,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-03.md",
+      "status": "pending"
+    },
+    {
+      "page": 4,
+      "title_guess": "NuDeveloper Ecosystem – Make engineers’ jobs easier.",
+      "image_count": 3,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-04.md",
+      "status": "pending"
+    },
+    {
+      "page": 5,
+      "title_guess": "NuDeveloper Ecosystem – Make engineers’ jobs easier.",
+      "image_count": 4,
+      "asset_ids": [
+        "scene-photo"
+      ],
+      "asset_files": [
+        "scene-photo.png"
+      ],
+      "file": "pages/page-05.md",
+      "status": "pending"
+    },
+    {
+      "page": 6,
+      "title_guess": "NuDeveloper Ecosystem – Make engineers’ jobs easier.",
+      "image_count": 4,
+      "asset_ids": [
+        "result-left",
+        "result-right"
+      ],
+      "asset_files": [
+        "result-left.png",
+        "result-right.png"
+      ],
+      "file": "pages/page-06.md",
+      "status": "pending"
+    },
+    {
+      "page": 7,
+      "title_guess": "NuDeveloper Ecosystem – Make engineers’ jobs easier.",
+      "image_count": 2,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-07.md",
+      "status": "pending"
+    },
+    {
+      "page": 8,
+      "title_guess": "NuDeveloper Ecosystem – Make engineers’ jobs easier.",
+      "image_count": 2,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-08.md",
+      "status": "pending"
+    },
+    {
+      "page": 9,
+      "title_guess": "NuDeveloper Ecosystem – Make engineers’ jobs easier.",
+      "image_count": 2,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-09.md",
+      "status": "pending"
+    },
+    {
+      "page": 10,
+      "title_guess": "NuDeveloper Ecosystem – Make engineers’ jobs easier.",
+      "image_count": 2,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-10.md",
+      "status": "pending"
+    },
+    {
+      "page": 11,
+      "title_guess": "NuDeveloper Ecosystem – Make engineers’ jobs easier.",
+      "image_count": 3,
+      "asset_ids": [
+        "labelimg-overview"
+      ],
+      "asset_files": [
+        "labelimg-overview.png"
+      ],
+      "file": "pages/page-11.md",
+      "status": "pending"
+    },
+    {
+      "page": 12,
+      "title_guess": "NuDeveloper Ecosystem – Make engineers’ jobs easier.",
+      "image_count": 2,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-12.md",
+      "status": "pending"
+    },
+    {
+      "page": 13,
+      "title_guess": "NuDeveloper Ecosystem – Make engineers’ jobs easier.",
+      "image_count": 3,
+      "asset_ids": [
+        "labelimg-window"
+      ],
+      "asset_files": [
+        "labelimg-window.png"
+      ],
+      "file": "pages/page-13.md",
+      "status": "pending"
+    },
+    {
+      "page": 14,
+      "title_guess": "NuDeveloper Ecosystem – Make engineers’ jobs easier.",
+      "image_count": 3,
+      "asset_ids": [
+        "labelimg-open"
+      ],
+      "asset_files": [
+        "labelimg-open.png"
+      ],
+      "file": "pages/page-14.md",
+      "status": "pending"
+    },
+    {
+      "page": 15,
+      "title_guess": "NuDeveloper Ecosystem – Make engineers’ jobs easier.",
+      "image_count": 3,
+      "asset_ids": [
+        "labelimg-rectbox"
+      ],
+      "asset_files": [
+        "labelimg-rectbox.png"
+      ],
+      "file": "pages/page-15.md",
+      "status": "pending"
+    },
+    {
+      "page": 16,
+      "title_guess": "NuDeveloper Ecosystem – Make engineers’ jobs easier.",
+      "image_count": 3,
+      "asset_ids": [
+        "labelimg-draw"
+      ],
+      "asset_files": [
+        "labelimg-draw.png"
+      ],
+      "file": "pages/page-16.md",
+      "status": "pending"
+    },
+    {
+      "page": 17,
+      "title_guess": "NuDeveloper Ecosystem – Make engineers’ jobs easier.",
+      "image_count": 3,
+      "asset_ids": [
+        "labelimg-label"
+      ],
+      "asset_files": [
+        "labelimg-label.png"
+      ],
+      "file": "pages/page-17.md",
+      "status": "pending"
+    },
+    {
+      "page": 18,
+      "title_guess": "NuDeveloper Ecosystem – Make engineers’ jobs easier.",
+      "image_count": 3,
+      "asset_ids": [
+        "labelimg-reuse"
+      ],
+      "asset_files": [
+        "labelimg-reuse.png"
+      ],
+      "file": "pages/page-18.md",
+      "status": "pending"
+    },
+    {
+      "page": 19,
+      "title_guess": "NuDeveloper Ecosystem – Make engineers’ jobs easier.",
+      "image_count": 2,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-19.md",
+      "status": "pending"
+    },
+    {
+      "page": 20,
+      "title_guess": "NuDeveloper Ecosystem – Make engineers’ jobs easier.",
+      "image_count": 2,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-20.md",
+      "status": "pending"
+    },
+    {
+      "page": 21,
+      "title_guess": "NuDeveloper Ecosystem – Make engineers’ jobs easier.",
+      "image_count": 2,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-21.md",
+      "status": "pending"
+    },
+    {
+      "page": 22,
+      "title_guess": "NuDeveloper Ecosystem – Make engineers’ jobs easier.",
+      "image_count": 3,
+      "asset_ids": [
+        "kaggle-download"
+      ],
+      "asset_files": [
+        "kaggle-download.png"
+      ],
+      "file": "pages/page-22.md",
+      "status": "pending"
+    },
+    {
+      "page": 23,
+      "title_guess": "NuDeveloper Ecosystem – Make engineers’ jobs easier.",
+      "image_count": 2,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-23.md",
+      "status": "pending"
+    },
+    {
+      "page": 24,
+      "title_guess": "NuDeveloper Ecosystem – Make engineers’ jobs easier.",
+      "image_count": 2,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-24.md",
+      "status": "pending"
+    },
+    {
+      "page": 25,
+      "title_guess": "NuDeveloper Ecosystem – Make engineers’ jobs easier.",
+      "image_count": 2,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-25.md",
+      "status": "pending"
+    },
+    {
+      "page": 26,
+      "title_guess": "NuDeveloper Ecosystem – Make engineers’ jobs easier.",
+      "image_count": 3,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-26.md",
+      "status": "pending"
+    },
+    {
+      "page": 27,
+      "title_guess": "NuDeveloper Ecosystem – Make engineers’ jobs easier.",
+      "image_count": 4,
+      "asset_ids": [
+        "train-config",
+        "train-epoch"
+      ],
+      "asset_files": [
+        "train-config.png",
+        "train-epoch.png"
+      ],
+      "file": "pages/page-27.md",
+      "status": "pending"
+    },
+    {
+      "page": 28,
+      "title_guess": "NuDeveloper Ecosystem – Make engineers’ jobs easier.",
+      "image_count": 8,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-28.md",
+      "status": "pending"
+    },
+    {
+      "page": 29,
+      "title_guess": "NuDeveloper Ecosystem – Make engineers’ jobs easier.",
+      "image_count": 2,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-29.md",
+      "status": "pending"
+    },
+    {
+      "page": 30,
+      "title_guess": "NuDeveloper Ecosystem – Make engineers’ jobs easier.",
+      "image_count": 2,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-30.md",
+      "status": "pending"
+    },
+    {
+      "page": 31,
+      "title_guess": "NuDeveloper Ecosystem – Make engineers’ jobs easier.",
+      "image_count": 2,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-31.md",
+      "status": "pending"
+    },
+    {
+      "page": 32,
+      "title_guess": "NuDeveloper Ecosystem – Make engineers’ jobs easier.",
+      "image_count": 3,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-32.md",
+      "status": "pending"
+    },
+    {
+      "page": 33,
+      "title_guess": "NuDeveloper Ecosystem – Make engineers’ jobs easier.",
+      "image_count": 3,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-33.md",
+      "status": "pending"
+    },
+    {
+      "page": 34,
+      "title_guess": "NuDeveloper Ecosystem – Make engineers’ jobs easier.",
+      "image_count": 4,
+      "asset_ids": [
+        "boardinit-clk",
+        "boardinit-periph"
+      ],
+      "asset_files": [
+        "boardinit-clk.png",
+        "boardinit-periph.png"
+      ],
+      "file": "pages/page-34.md",
+      "status": "pending"
+    },
+    {
+      "page": 35,
+      "title_guess": "NuDeveloper Ecosystem – Make engineers’ jobs easier.",
+      "image_count": 3,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-35.md",
+      "status": "pending"
+    },
+    {
+      "page": 36,
+      "title_guess": "NuDeveloper Ecosystem – Make engineers’ jobs easier.",
+      "image_count": 3,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-36.md",
+      "status": "pending"
+    },
+    {
+      "page": 37,
+      "title_guess": "NuDeveloper Ecosystem – Make engineers’ jobs easier.",
+      "image_count": 3,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-37.md",
+      "status": "pending"
+    },
+    {
+      "page": 38,
+      "title_guess": "NuDeveloper Ecosystem – Make engineers’ jobs easier.",
+      "image_count": 4,
+      "asset_ids": [
+        "inference-code",
+        "inference-decl"
+      ],
+      "asset_files": [
+        "inference-code.png",
+        "inference-decl.png"
+      ],
+      "file": "pages/page-38.md",
+      "status": "covered",
+      "review_note": "?? ??? ?? ?? ???? HTML ?? ??? ???."
+    },
+    {
+      "page": 39,
+      "title_guess": "NuDeveloper Ecosystem – Make engineers’ jobs easier.",
+      "image_count": 3,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-39.md",
+      "status": "covered",
+      "review_note": "PresentInferenceResult ?? ???? ??? HTML ?? ??? ???."
+    },
+    {
+      "page": 40,
+      "title_guess": "NuDeveloper Ecosystem – Make engineers’ jobs easier.",
+      "image_count": 3,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-40.md",
+      "status": "covered",
+      "review_note": "??? ?? ?? ???? ???."
+    },
+    {
+      "page": 41,
+      "title_guess": "NuDeveloper Ecosystem – Make engineers’ jobs easier.",
+      "image_count": 2,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-41.md",
+      "status": "covered",
+      "review_note": "??? ?? ??? resultsOut ???? ???."
+    },
+    {
+      "page": 42,
+      "title_guess": "NuDeveloper Ecosystem – Make engineers’ jobs easier.",
+      "image_count": 3,
+      "asset_ids": [
+        "insert-topn-code"
+      ],
+      "asset_files": [
+        "insert-topn-code.png"
+      ],
+      "file": "pages/page-42.md",
+      "status": "covered",
+      "review_note": "InsertTopNDetection ??? ?? ???? ???."
+    },
+    {
+      "page": 43,
+      "title_guess": "NuDeveloper Ecosystem – Make engineers’ jobs easier.",
+      "image_count": 3,
+      "asset_ids": [
+        "detectorpost-code"
+      ],
+      "asset_files": [
+        "detectorpost-code.png"
+      ],
+      "file": "pages/page-43.md",
+      "status": "covered",
+      "review_note": "DetectorPostprocessing ??? ?? ???? ???."
+    },
+    {
+      "page": 44,
+      "title_guess": "NuDeveloper Ecosystem – Make engineers’ jobs easier.",
+      "image_count": 3,
+      "asset_ids": [
+        "detection-struct"
+      ],
+      "asset_files": [
+        "detection-struct.png"
+      ],
+      "file": "pages/page-44.md",
+      "status": "covered",
+      "review_note": "DetectionResult ?? ??? ?? ???? ???."
+    },
+    {
+      "page": 45,
+      "title_guess": "NuDeveloper Ecosystem – Make engineers’ jobs easier.",
+      "image_count": 3,
+      "asset_ids": [
+        "draw-boxes-code"
+      ],
+      "asset_files": [
+        "draw-boxes-code.png"
+      ],
+      "file": "pages/page-45.md",
+      "status": "covered",
+      "review_note": "DrawImageDetectionBoxes ??? ?? ???? ???."
+    },
+    {
+      "page": 46,
+      "title_guess": "NuDeveloper Ecosystem – Make engineers’ jobs easier.",
+      "image_count": 4,
+      "asset_ids": [
+        "display-result"
+      ],
+      "asset_files": [
+        "display-result.png"
+      ],
+      "file": "pages/page-46.md",
+      "status": "covered",
+      "review_note": "?? ?? ??? LCD ?? ???? ???."
+    },
+    {
+      "page": 47,
+      "title_guess": "NuDeveloper Ecosystem – Make engineers’ jobs easier.",
+      "image_count": 3,
+      "asset_ids": [
+        "demo-shot"
+      ],
+      "asset_files": [
+        "demo-shot.png"
+      ],
+      "file": "pages/page-47.md",
+      "status": "pending"
+    }
+  ]
+}

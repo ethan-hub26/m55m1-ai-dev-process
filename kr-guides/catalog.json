@@ -1,0 +1,58 @@
+[
+  {
+    "slug": "person-track-kr",
+    "title": "Person Tracking KR Guide",
+    "source_pdf": "M55M1-eBook-Sample-Code-master/Doc/????.pdf",
+    "html": "deliverables/kr-guides/person-track-kr/Person_Tracking_KR_Guide.html",
+    "assets_dir": "deliverables/kr-guides/person-track-kr/assets/tracker",
+    "generator_script": "scripts/generate_person_tracking_kr_cropped.py"
+  },
+  {
+    "slug": "garbage-classification-kr",
+    "title": "Garbage Classification KR Guide",
+    "source_pdf": "M55M1-eBook-Sample-Code-master/Doc/????.pdf",
+    "html": "deliverables/kr-guides/garbage-classification-kr/Garbage_Classification_KR_Guide.html",
+    "assets_dir": "deliverables/kr-guides/garbage-classification-kr/assets/garbage",
+    "generator_script": "scripts/generate_garbage_classification_kr.py"
+  },
+  {
+    "slug": "fall-detection-kr",
+    "title": "Fall Detection KR Guide",
+    "source_pdf": "M55M1-eBook-Sample-Code-master/Doc/????.pdf",
+    "html": "deliverables/kr-guides/fall-detection-kr/Fall_Detection_KR_Guide.html",
+    "assets_dir": "deliverables/kr-guides/fall-detection-kr/assets/fall",
+    "generator_script": "scripts/generate_remaining_kr_guides.py"
+  },
+  {
+    "slug": "fire-detection-kr",
+    "title": "Fire Detection KR Guide",
+    "source_pdf": "M55M1-eBook-Sample-Code-master/Doc/????.pdf",
+    "html": "deliverables/kr-guides/fire-detection-kr/Fire_Detection_KR_Guide.html",
+    "assets_dir": "deliverables/kr-guides/fire-detection-kr/assets/fire",
+    "generator_script": "scripts/generate_remaining_kr_guides.py"
+  },
+  {
+    "slug": "drug-recognition-kr",
+    "title": "Drug Recognition KR Guide",
+    "source_pdf": "M55M1-eBook-Sample-Code-master/Doc/????.pdf",
+    "html": "deliverables/kr-guides/drug-recognition-kr/Drug_Recognition_KR_Guide.html",
+    "assets_dir": "deliverables/kr-guides/drug-recognition-kr/assets/med",
+    "generator_script": "scripts/generate_remaining_kr_guides.py"
+  },
+  {
+    "slug": "sound-denoise-kr",
+    "title": "Sound Denoise KR Guide",
+    "source_pdf": "M55M1-eBook-Sample-Code-master/Doc/????.pdf",
+    "html": "deliverables/kr-guides/sound-denoise-kr/Sound_Denoise_KR_Guide.html",
+    "assets_dir": "deliverables/kr-guides/sound-denoise-kr/assets/audio",
+    "generator_script": "scripts/generate_remaining_kr_guides.py"
+  },
+  {
+    "slug": "apple-quality-kr",
+    "title": "Apple Quality KR Guide",
+    "source_pdf": "M55M1-eBook-Sample-Code-master/Doc/??????.pdf",
+    "html": "deliverables/kr-guides/apple-quality-kr/Apple_Quality_KR_Guide.html",
+    "assets_dir": "deliverables/kr-guides/apple-quality-kr/assets/apple",
+    "generator_script": "scripts/generate_remaining_kr_guides.py"
+  }
+]

@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Person Tracking Development Guide</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=IBM+Plex+Mono:wght@400;600&display=swap');
+    :root {
+      --red:#c8102e; --red-dark:#8c0b1f; --red-light:#fdeaed; --bg:#f4f5f7; --panel:#fff;
+      --text:#1a1a1a; --muted:#6b7280; --border:#e2e4e9; --accent:#0057a8; --green:#00875a;
+      --shadow:0 2px 12px rgba(0,0,0,.08); --shadow-lg:0 8px 24px rgba(0,0,0,.12); --r:10px;
+    }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    html { scroll-behavior:smooth; }
+    body { font-family:'Noto Sans KR',sans-serif; background:var(--bg); color:var(--text); font-size:15px; line-height:1.75; }
+    .site-header { background:linear-gradient(135deg,var(--red-dark),var(--red) 60%,#e63050); color:#fff; padding:38px 40px; position:relative; overflow:hidden; }
+    .site-header::before { content:''; position:absolute; top:-80px; right:-80px; width:320px; height:320px; border-radius:50%; background:rgba(255,255,255,.08); }
+    .hdr-title { font-size:clamp(24px,4vw,40px); font-weight:900; line-height:1.2; position:relative; }
+    .hdr-sub { margin-top:10px; opacity:.88; max-width:920px; position:relative; }
+    .hdr-meta { display:flex; gap:12px; flex-wrap:wrap; margin-top:18px; position:relative; }
+    .meta-chip { background:rgba(255,255,255,.15); border:1px solid rgba(255,255,255,.26); border-radius:999px; padding:5px 13px; font-size:13px; }
+    .layout { display:grid; grid-template-columns:260px 1fr; max-width:1340px; margin:0 auto; }
+    .sidebar { background:var(--panel); border-right:1px solid var(--border); padding:24px 0; position:sticky; top:0; height:100vh; overflow-y:auto; }
+    .sidebar-title { font-size:11px; font-weight:700; letter-spacing:1.5px; color:var(--muted); padding:0 24px 10px; border-bottom:1px solid var(--border); margin-bottom:8px; text-transform:uppercase; }
+    .nav-link { display:block; padding:7px 24px 7px 32px; color:var(--text); text-decoration:none; font-size:13.5px; border-left:3px solid transparent; }
+    .nav-link:hover { background:var(--red-light); border-left-color:var(--red); color:var(--red-dark); }
+    .main { padding:36px 44px; min-width:0; }
+    .section { margin-bottom:56px; }
+    .scroll-anchor { scroll-margin-top:18px; }
+    .h1 { font-size:26px; font-weight:900; color:var(--red-dark); border-bottom:3px solid var(--red); padding-bottom:10px; margin-bottom:22px; display:flex; align-items:center; gap:12px; }
+    .h1 .num { background:var(--red); color:#fff; border-radius:6px; width:34px; height:34px; display:flex; align-items:center; justify-content:center; font-size:15px; font-weight:700; flex-shrink:0; }
+    .h2 { font-size:19px; font-weight:700; color:var(--accent); margin:26px 0 12px; display:flex; align-items:center; gap:8px; }
+    .h2::before { content:''; display:inline-block; width:4px; height:20px; background:var(--accent); border-radius:2px; }
+    .card { background:var(--panel); border:1px solid var(--border); border-radius:var(--r); padding:20px 24px; margin:14px 0; box-shadow:var(--shadow); }
+    .card-red { border-left:4px solid var(--red); background:var(--red-light); }
+    .card-blue { border-left:4px solid var(--accent); background:#eef4ff; }
+    .card-green { border-left:4px solid var(--green); background:#e6f7f1; }
+    .bullet-list, .step-list { margin:10px 0 4px; }
+    .bullet-list { list-style:none; }
+    .bullet-list li { position:relative; padding:5px 0 5px 18px; }
+    .bullet-list li::before { content:'◆'; position:absolute; left:0; color:var(--red); font-size:11px; }
+    .step-list { counter-reset:step; list-style:none; }
+    .step-list li { counter-increment:step; display:flex; gap:14px; align-items:flex-start; padding:12px 0; border-bottom:1px solid var(--border); }
+    .step-list li:last-child { border-bottom:none; }
+    .step-list li::before { content:counter(step); background:var(--red); color:#fff; border-radius:50%; width:26px; height:26px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; }
+    .table-wrap { overflow-x:auto; margin:14px 0; border-radius:var(--r); box-shadow:var(--shadow); }
+    table { width:100%; border-collapse:collapse; background:var(--panel); }
+    th { background:var(--red); color:#fff; font-size:13px; font-weight:600; padding:10px 14px; text-align:left; }
+    td { padding:9px 14px; font-size:13.5px; border-bottom:1px solid var(--border); vertical-align:top; }
+    tr:last-child td { border-bottom:none; }
+    tr:nth-child(even) td { background:#fafafa; }
+    .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:12px 0; align-items:start; }
+    .fig-box { background:var(--panel); border:1px solid var(--border); border-radius:var(--r); overflow:hidden; box-shadow:var(--shadow-lg); }
+    .fig-note { padding:14px 16px 4px; font-size:14px; line-height:1.7; color:var(--text); }
+    .fig-image { width:100%; height:auto; max-height:440px; display:block; background:#fff; padding:10px; object-fit:contain; }
+    .fig-image-wide { max-height:560px; padding:6px; }
+    .fig-cap { text-align:center; font-size:13px; color:var(--muted); padding:10px; font-style:italic; border-top:1px solid var(--border); background:#fafafa; }
+    .code-block { font-family:'IBM Plex Mono',monospace; background:#10151c; color:#eef4ff; border-radius:var(--r); padding:16px; overflow:auto; font-size:13px; line-height:1.65; margin:12px 0; }
+    .mono { font-family:'IBM Plex Mono',monospace; }
+    p { margin-bottom:10px; }
+    .back-top { position:fixed; right:24px; bottom:24px; background:var(--red); color:#fff; border-radius:50%; width:44px; height:44px; display:flex; align-items:center; justify-content:center; font-size:20px; text-decoration:none; box-shadow:0 4px 16px rgba(200,16,46,.4); }
+    @media (max-width:900px) { .layout { grid-template-columns:1fr; } .sidebar { position:static; height:auto; } .main { padding:20px 16px; } .grid-2 { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <div class="site-header" id="top">
+    <div class="hdr-title">Person Tracking Development Guide</div>        
+  </div>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="sidebar-title">Contents</div>
+      <a class="nav-link" href="#quickstart">0. Quick Start</a>
+<a class="nav-link" href="#intro">1. 사례 소개</a>
+<a class="nav-link" href="#model">2. 모델 비교</a>
+<a class="nav-link" href="#labelimg">3. LabelImg</a>
+<a class="nav-link" href="#training">4. PC 학습</a>
+<a class="nav-link" href="#board">5. 개발보드 추론</a>
+<a class="nav-link" href="#demo">6. DEMO</a>
+    </aside>
+    <main class="main">
+      <section class="section">
+        <div class="h1 scroll-anchor" id="quickstart"><span class="num">0</span><span>Quick Start</span></div>
+        <div class="card card-blue">
+          <ul class="bullet-list">            
+            <li>주제: Nuvoton M55M1 기반 사람 검출 프로젝트의 데이터 준비, 학습, 모델 변환, 보드 추론 흐름</li>
+            <li>핵심 모델: <span class="mono">YOLOX Nano</span></li>
+            <li>변환 경로: <span class="mono">PyTorch → ONNX → TensorFlow Lite → Vela</span></li>
+            <li>결과: 테스트 148건 중 136건 검출로 약 <span class="mono">92.5%</span> 정확도</li>
+          </ul>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>대목차</th><th>HTML 반영 범위</th></tr></thead>
+            <tbody>
+              <tr><td>사례 소개</td><td>3~6페이지 프로젝트 요약, 사용 시나리오, 결과</td></tr>
+              <tr><td>모델 비교</td><td>7~10페이지 모델 크기, 훈련 효율, 적용 시나리오</td></tr>
+              <tr><td>LabelImg</td><td>11~18페이지 라벨링 절차</td></tr>
+              <tr><td>Anaconda 환경 기반 PC 학습</td><td>19~31페이지 개발 환경, 학습, ONNX, Vela</td></tr>
+              <tr><td>개발보드 추론 시스템 흐름</td><td>32~46페이지 보드 추론 흐름과 함수 설명</td></tr>
+              <tr><td>DEMO 영상</td><td>47페이지 링크</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="h2">링크 대응표</div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>페이지</th><th>설명</th><th>URL</th></tr></thead>
+            <tbody>
+              <tr><td>5</td><td>Source</td><td><a href="https://jp.freepik.com/premium-ai-image/workers-with-safety-vests-hard-hats-working-with-forklift-machines-warehouse-xaworking-with-forklift-machines-warehouse-with-pallets-boxes-generative-ai_46152009.htm" target="_blank" rel="noopener noreferrer">https://jp.freepik.com/premium-ai-image/workers-with-safety-vests-hard-hats-working-with-forklift-machines-warehouse-xaworking-with-forklift-machines-warehouse-with-pallets-boxes-generative-ai_46152009.htm</a></td></tr>
+              <tr><td>12</td><td>참고 튜토리얼</td><td><a href="https://blog.csdn.net/knighthood2001/article/details/125883343" target="_blank" rel="noopener noreferrer">https://blog.csdn.net/knighthood2001/article/details/125883343</a></td></tr>
+              <tr><td>23</td><td>모델 리소스</td><td><a href="https://github.com/MaxCYCHEN/yolox-ti-lite_tflite_int8" target="_blank" rel="noopener noreferrer">https://github.com/MaxCYCHEN/yolox-ti-lite_tflite_int8</a></td></tr>
+              <tr><td>23</td><td>데이터셋</td><td><a href="https://www.kaggle.com/datasets/zhenddos/human-detection" target="_blank" rel="noopener noreferrer">https://www.kaggle.com/datasets/zhenddos/human-detection</a></td></tr>
+              <tr><td>24</td><td>PyTorch CUDA 11.8 wheel</td><td><a href="https://download.pytorch.org/whl/cu118" target="_blank" rel="noopener noreferrer">https://download.pytorch.org/whl/cu118</a></td></tr>
+              <tr><td>25</td><td>MMCV 2.0.1</td><td><a href="https://download.openmmlab.com/mmcv/dist/cu118/torch2.0/index.html" target="_blank" rel="noopener noreferrer">https://download.openmmlab.com/mmcv/dist/cu118/torch2.0/index.html</a></td></tr>
+              <tr><td>47</td><td>Link</td><td><a href="https://www.youtube.com/watch?v=fcoDVMUbxHQ" target="_blank" rel="noopener noreferrer">https://www.youtube.com/watch?v=fcoDVMUbxHQ</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section class="section">
+        <div class="h1 scroll-anchor" id="intro"><span class="num">1</span><span>사례 소개</span></div>
+        <div class="h2">섹션 구성</div>
+        <div class="card">
+          <ul class="bullet-list">
+            <li>프로젝트 요약</li>
+            <li>요구사항 및 사용 시나리오 예시</li>
+            <li>사례 결과</li>
+          </ul>
+        </div>
+        <div class="h2">프로젝트 요약</div>
+        <div class="card card-red">
+          <p>이 프로젝트는 기계 학습 기술을 이용해 Nuvoton M55M1 임베디드 플랫폼에서 사람 검출을 구현할 수 있는지와 그 응용 가능성을 검토하는 것을 목표로 합니다.</p>
+          <p>사람 검출은 보안, 스마트 빌딩, 산업 자동화 분야에서 점점 중요한 응용 시나리오가 되고 있으며, M55M1은 고성능 처리 능력과 저전력 특성 때문에 IoT 및 스마트 장치에 적합한 보드로 소개됩니다.</p>
+        </div>
+        <div class="h2">요구사항과 사용 시나리오</div>
+        <div class="card">
+          <ul class="bullet-list">
+            <li>공장, 공사 현장 같은 위험 구역에서 사람이 특정 영역에 들어오거나 나가는 상황을 감시해야 합니다.</li>
+            <li>산업 생산 라인 사이의 출입 금지 구역에 검출 장비를 설치해 사람이 진입했는지를 감시하는 사례를 제시합니다.</li>
+          </ul>
+          <p>사진 출처: <a href="https://jp.freepik.com/premium-ai-image/workers-with-safety-vests-hard-hats-working-with-forklift-machines-warehouse-xaworking-with-forklift-machines-warehouse-with-pallets-boxes-generative-ai_46152009.htm" target="_blank" rel="noopener noreferrer">Freepik source</a></p>
+        </div>
+        <div class="h2">사례 결과</div>
+        <div class="card card-green">
+          <p>박스로 표시된 부분은 사람 출현 위치이며, 사람 검출 시스템은 임베디드 플랫폼에서 <span class="mono">92.5%</span>의 정확도(<span class="mono">136/148</span>)를 달성한 것으로 정리됩니다.</p>
+          <p>또한 모델에 양자화와 경량화를 적용해 자원이 제한된 환경에서도 효율적으로 동작하도록 했다고 적고 있습니다.</p>
+          <ol class="step-list">
+            <li><strong>TinyML 훈련</strong>: PC에서 경량 모델을 학습합니다.</li>
+            <li><strong>경량화 모델 및 변환</strong>: ONNX와 TensorFlow Lite 포맷으로 변환합니다.</li>
+            <li><strong>모델 Vela 컴파일 및 설정</strong>: Arm microNPU용 최적화를 수행합니다.</li>
+            <li><strong>개발보드 배포</strong>: 모델과 코드를 보드 프로젝트에 통합합니다.</li>
+            <li><strong>C 언어 프로그램 작성</strong>: 결과 표시와 후처리 코드를 구성합니다.</li>
+          </ol>
+        </div>
+        <div class="grid-2"><div class="fig-box">
+  <div class="fig-note">출입 감시가 필요한 작업 현장 예시입니다.</div>
+  <img class="fig-image" src="./assets/tracker/scene-photo.png" alt="사람 출입 감시가 필요한 작업 현장 예시 이미지"/>
+  <div class="fig-cap">사람 출입 감시가 필요한 작업 현장 예시 이미지</div>
+</div></div>
+        <div class="grid-2"><div class="fig-box">
+  <div class="fig-note">사람 검출 결과 예시 1입니다. 경계 상자와 라벨이 실제 화면에 어떻게 표시되는지 보여줍니다.</div>
+  <img class="fig-image" src="./assets/tracker/result-left.png" alt="검출 예시 1"/>
+  <div class="fig-cap">검출 예시 1</div>
+</div><div class="fig-box">
+  <div class="fig-note">사람 검출 결과 예시 2입니다. 다른 장면에서 같은 후처리 결과가 어떻게 보이는지 확인할 수 있습니다.</div>
+  <img class="fig-image" src="./assets/tracker/result-right.png" alt="검출 예시 2"/>
+  <div class="fig-cap">검출 예시 2</div>
+</div></div>
+      </section>
+      <section class="section">
+        <div class="h1 scroll-anchor" id="model"><span class="num">2</span><span>모델 비교</span></div>
+        <div class="h2">비교 기준</div>
+        <div class="card">
+          <ul class="bullet-list">
+            <li>모델 크기와 추론 속도</li>
+            <li>훈련 효율</li>
+            <li>적용 시나리오</li>
+          </ul>
+        </div>
+        <div class="h2">모델 크기와 추론 속도</div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>구분</th><th>내용</th></tr></thead>
+            <tbody>
+              <tr><td>YOLOX Nano</td><td>본 프로젝트 사용 모델. 파라미터 수는 약 <span class="mono">0.91M</span>이며, 저연산 장치에 맞춰 최적화되어 스마트 카메라와 드론 같은 실시간 응용에 적합하다고 설명합니다.</td></tr>
+              <tr><td>추론 속도</td><td>Nuvoton M55M1 같은 엣지 플랫폼에서 매우 빠른 추론 속도를 보인다고 정리합니다.</td></tr>
+              <tr><td>기타 YOLO 모델</td><td><span class="mono">YOLOv4 / YOLOv5</span>는 고성능 GPU용 계열이며, 표준 <span class="mono">YOLOX-S / YOLOX-M</span> 등은 더 높은 정확도를 목표로 하지만 모델이 커질수록 추론 속도가 느려진다고 비교합니다.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="h2">훈련 효율</div>
+        <div class="card">
+          <ul class="bullet-list">
+            <li><span class="mono">YOLOX Nano</span>는 Anchor-free 구조를 사용하므로 anchor 의존성이 줄어들고 초기 매개변수 조정이 단순합니다.</li>
+            <li>새 데이터셋에 적응시키기 쉬운 점이 장점입니다.</li>
+            <li><span class="mono">YOLOv4 / YOLOv5</span>는 Anchor-based 방식이라 라벨 형식과 anchor 설정에 더 많은 조정이 필요합니다.</li>
+            <li>표준 <span class="mono">YOLOX</span>도 Anchor-free 흐름은 같지만 더 높은 연산 자원을 요구합니다.</li>
+          </ul>
+        </div>
+        <div class="h2">적용 시나리오</div>
+        <div class="card">
+          <ul class="bullet-list">
+            <li><span class="mono">YOLOX Nano</span>: 스마트 홈 도어락, 사람 감지, 모바일 앱 객체 검출, 산업용 소형 카메라 같은 실시간 엣지 시나리오</li>
+            <li><span class="mono">YOLOv4 / YOLOv5</span>: 서버나 고성능 GPU에서 대규모 영상 분석 또는 실시간 비디오 스트림 분석</li>
+            <li><span class="mono">표준 YOLOX</span>: 자율주행 센싱, 상업용 감시 시스템 같은 전문 응용</li>
+          </ul>
+        </div>
+      </section>
+      <section class="section">
+        <div class="h1 scroll-anchor" id="labelimg"><span class="num">3</span><span>LabelImg</span></div>
+        <div class="h2">라벨링 개요</div>
+        <div class="card card-red">
+          <p><span class="mono">LabelImg</span>로 이미지 <span class="mono">1000장</span>의 박스를 표시하고, 생성한 COCO 파일을 <span class="mono">Annotations</span> 폴더에 저장해 이후 모델 학습에 사용합니다.</p>
+        </div>
+        <div class="h2">설치와 실행</div>
+        <div class="card"><p>터미널에서 아래 명령으로 <span class="mono">LabelImg</span>를 설치하고 실행합니다.</p><pre class="code-block">pip install labelImg
+labelImg</pre><p>참고 링크: <a href="https://blog.csdn.net/knighthood2001/article/details/125883343" target="_blank" rel="noopener noreferrer">참고 튜토리얼</a></p></div>
+        <div class="h2">라벨링 절차</div>
+        <div class="card card-blue">
+          <ol class="step-list">
+            <li><span class="mono">LabelImg</span> 실행 창을 확인합니다.</li>
+            <li><span class="mono">Open</span>으로 이미지를 불러옵니다.</li>
+            <li>우클릭 후 <span class="mono">Create RectBox</span>를 선택합니다.</li>
+            <li>검출하고 싶은 사람 영역을 박스로 감쌉니다.</li>
+            <li>객체 이름을 입력합니다.</li>
+            <li>같은 라벨이 반복되면 기존 이름 목록에서 바로 선택할 수 있습니다.</li>
+          </ol>
+        </div>
+        <div class="grid-2"><div class="fig-box">
+  <div class="fig-note">LabelImg에서 사람 객체를 라벨링한 예시 화면입니다.</div>
+  <img class="fig-image fig-image-wide" src="./assets/tracker/labelimg-overview.png" alt="LabelImg 라벨링 화면 예시"/>
+  <div class="fig-cap">LabelImg 라벨링 화면 예시</div>
+</div><div class="fig-box">
+  <div class="fig-note">LabelImg 실행 직후의 메인 창입니다. 프로젝트 폴더와 이미지 목록을 여기서 확인합니다.</div>
+  <img class="fig-image" src="./assets/tracker/labelimg-window.png" alt="LabelImg 실행 창"/>
+  <div class="fig-cap">LabelImg 실행 창</div>
+</div></div>
+        <div class="grid-2"><div class="fig-box">
+  <div class="fig-note">Open 기능으로 라벨링할 이미지를 불러오는 단계입니다.</div>
+  <img class="fig-image fig-image-wide" src="./assets/tracker/labelimg-open.png" alt="이미지 열기 화면"/>
+  <div class="fig-cap">이미지 열기 화면</div>
+</div><div class="fig-box">
+  <div class="fig-note">Create RectBox 도구를 선택해 바운딩 박스를 그릴 준비를 합니다.</div>
+  <img class="fig-image" src="./assets/tracker/labelimg-rectbox.png" alt="Create RectBox 선택"/>
+  <div class="fig-cap">Create RectBox 선택</div>
+</div></div>
+        <div class="grid-2"><div class="fig-box">
+  <div class="fig-note">사람이 있는 영역을 박스로 감싸는 단계입니다.</div>
+  <img class="fig-image" src="./assets/tracker/labelimg-draw.png" alt="사람 영역 바운딩 박스 작성"/>
+  <div class="fig-cap">사람 영역 바운딩 박스 작성</div>
+</div><div class="fig-box">
+  <div class="fig-note">새 박스에 클래스 이름을 입력하는 단계입니다.</div>
+  <img class="fig-image" src="./assets/tracker/labelimg-label.png" alt="객체 이름 입력"/>
+  <div class="fig-cap">객체 이름 입력</div>
+</div></div>
+        <div class="grid-2"><div class="fig-box">
+  <div class="fig-note">이미 만든 라벨을 재사용해 반복 입력을 줄이는 방법입니다.</div>
+  <img class="fig-image" src="./assets/tracker/labelimg-reuse.png" alt="기존 라벨 재사용"/>
+  <div class="fig-cap">기존 라벨 재사용</div>
+</div></div>
+      </section>
+      <section class="section">
+        <div class="h1 scroll-anchor" id="training"><span class="num">4</span><span>PC 학습</span></div>
+        <div class="h2">PC 학습 구성</div>
+        <div class="card">
+          <ul class="bullet-list">
+            <li>본 프로젝트의 하드웨어 및 모델 사양</li>
+            <li>데이터셋 준비</li>
+            <li>Anaconda 환경 구축</li>
+            <li>YOLOX Nano 모델 학습</li>
+            <li>ONNX 변환</li>
+            <li>Vela 컴파일러</li>
+          </ul>
+        </div>
+        <div class="h2">하드웨어 및 모델 사양</div>
+        <div class="table-wrap"><table><thead><tr><th>항목</th><th>값</th></tr></thead><tbody><tr><td>GPU</td><td>RTX 3060 Ti</td></tr><tr><td>CUDA</td><td>11.8</td></tr><tr><td>PyTorch</td><td>2.0.0</td></tr><tr><td>학습 파라미터</td><td>EPOCH 200, BATCH SIZE 64</td></tr><tr><td>학습 시간</td><td>약 1.5시간</td></tr></tbody></table></div>
+        <div class="h2">데이터셋 준비</div>
+        <div class="card"><ul class="bullet-list"><li>데이터 준비 단계는 <span class="mono">LabelImg</span>, <span class="mono">Kaggle</span>, 경량 모델 선택으로 구성됩니다.</li><li>훈련 프레임워크는 <span class="mono">PyTorch</span>, 모델은 <span class="mono">Yolox-nano</span>, 라벨링 도구는 <span class="mono">LabelImg</span>, 포맷은 <span class="mono">COCO JSON</span>입니다.</li><li>데이터 수량은 <span class="mono">Train 343</span>, <span class="mono">Valid 148</span>입니다.</li></ul></div>
+        <div class="card card-green">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>표기</th><th>URL</th></tr></thead>
+              <tbody>
+                <tr><td>모델 리소스</td><td><a href="https://github.com/MaxCYCHEN/yolox-ti-lite_tflite_int8" target="_blank" rel="noopener noreferrer">https://github.com/MaxCYCHEN/yolox-ti-lite_tflite_int8</a></td></tr>
+                <tr><td>데이터셋</td><td><a href="https://www.kaggle.com/datasets/zhenddos/human-detection" target="_blank" rel="noopener noreferrer">https://www.kaggle.com/datasets/zhenddos/human-detection</a></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="grid-2"><div class="fig-box">
+  <div class="fig-note">Kaggle 데이터셋 다운로드 페이지입니다.</div>
+  <img class="fig-image fig-image-wide" src="./assets/tracker/kaggle-download.png" alt="Kaggle 데이터셋 다운로드 화면"/>
+  <div class="fig-cap">Kaggle 데이터셋 다운로드 화면</div>
+</div></div>
+        <div class="h2">Anaconda 환경 구성</div>
+        <div class="card"><p>Python 환경 생성, <span class="mono">pip</span> 업그레이드, <span class="mono">CUDA 11.8</span>용 PyTorch 설치, <span class="mono">MMCV 2.0.1</span> 설치, 추가 요구 패키지 설치, 마지막으로 <span class="mono">YOLOX</span> 개발 모드 설치 순서로 진행합니다.</p><pre class="code-block">conda create --name yolox_nu python=3.10
+conda activate yolox_nu
+python -m pip install --upgrade pip setuptools
+python -m pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+python -m pip install mmcv==2.0.1 -f https://download.openmmlab.com/mmcv/dist/cu118/torch2.0/index.html
+python -m pip install --no-input -r requirements.txt
+python setup.py develop</pre></div>
+        <div class="h2">학습 실행</div>
+        <div class="card"><p>사전학습 모델을 사용해 학습을 시작하고, <span class="mono">exps/default/yolox_nano_ti_lite_nu.py</span> 설정 파일에서 데이터셋 경로, 클래스 수, epoch를 자신의 데이터에 맞게 수정합니다.</p><ul class="bullet-list"><li>데이터셋 디렉터리 구조를 학습 스크립트가 기대하는 형태로 맞춥니다.</li><li><span class="mono">class</span> 수와 <span class="mono">epoch=200</span> 설정을 학습 조건에 맞게 지정합니다.</li></ul><pre class="code-block">Datasets/&lt;your_datasets_name&gt;/
+  annotations/
+    train_annotation_json_file
+    val_annotation_json_file
+  train2017/
+    train_img
+  val2017/
+    validation_img
+
+python tools/train.py -f &lt;MODEL_CONFIG_FILE&gt; -d 1 -b &lt;BATCH_SIZE&gt; --fp16 -o -c &lt;PRETRAIN_MODEL_PATH&gt;</pre></div>
+        <div class="h2">ONNX, TensorFlow Lite, Vela</div>
+        <div class="card card-blue"><ul class="bullet-list"><li><span class="mono">ONNX</span>는 프레임워크 간 모델 이식을 위한 중간 포맷입니다.</li><li><span class="mono">TensorFlow Lite</span>는 양자화와 하드웨어 가속을 통해 임베디드 추론 속도와 효율을 높입니다.</li><li>절차는 <span class="mono">PyTorch → ONNX → calibration data 생성 → ONNX to TFLite</span>입니다.</li><li><span class="mono">Vela</span>는 Arm microNPU용 컴파일러이며, TFLite 모델 최적화, NPU 연산 배치, 메모리 접근 및 명령 스트림 최적화를 수행한다고 설명합니다.</li><li><span class="mono">variables.bat</span> 수정과 <span class="mono">gen_modle_cpp</span> 실행 후 결과 파일은 <span class="mono">vela\generated\yolox_nano_ti_lite_nu_full_integer_quant_vela.tflite.cc</span>에 생성됩니다.</li></ul><pre class="code-block">python tools/export_onnx.py -f &lt;MODEL_CONFIG_FILE&gt; -c &lt;TRAINED_PYTORCH_MODEL&gt; --output-name &lt;ONNX_MODEL_PATH&gt;
+python demo/TFLite/generate_calib_data.py --img-size &lt;IMG_SIZE&gt; --n-img &lt;NUMBER_IMG_FOR_CALI&gt; -o &lt;CALI_DATA_NPY_FILE&gt; --img-dir &lt;PATH_OF_TRAIN_IMAGE_DIR&gt;
+onnx2tf -i &lt;ONNX_MODEL_PATH&gt; -oiqt -qcind images &lt;CALI_DATA_NPY_FILE&gt; [[[[0,0,0]]]] [[[[1,1,1]]]]</pre><pre class="code-block">set MODEL_SRC_FILE=&lt;your tflite model&gt;
+set MODEL_OPTIMISE_FILE=&lt;output vela model&gt;
+gen_modle_cpp</pre></div>
+        <div class="grid-2"><div class="fig-box">
+  <div class="fig-note">데이터셋 경로와 annotation 파일 경로를 현재 프로젝트 구조에 맞게 수정하는 부분입니다.</div>
+  <img class="fig-image" src="./assets/tracker/train-config.png" alt="YOLOX 설정 파일의 데이터셋 및 클래스 수 조정"/>
+  <div class="fig-cap">YOLOX 설정 파일의 데이터셋 및 클래스 수 조정</div>
+</div><div class="fig-box">
+  <div class="fig-note">클래스 수와 epoch 값을 학습 조건에 맞게 조정하는 부분입니다.</div>
+  <img class="fig-image" src="./assets/tracker/train-epoch.png" alt="학습 epoch 설정 예시"/>
+  <div class="fig-cap">학습 epoch 설정 예시</div>
+</div></div>
+      </section>
+      <section class="section">
+        <div class="h1 scroll-anchor" id="board"><span class="num">5</span><span>개발보드 추론</span></div>        
+        <div class="h2">전체 시스템 흐름</div>
+        <div class="card"><ol class="step-list"><li><strong>System Initialization</strong>: 시스템 초기화</li><li><strong>Capture Image</strong>: 이미지 캡처</li><li><strong>Inference</strong>: 추론</li><li><strong>Post-Processing & Draw Results</strong>: 후처리 및 결과 그리기</li><li><strong>Display Results</strong>: 결과 표시</li></ol></div>
+        <div class="h2">시스템 초기화</div>
+        <div class="card card-blue"><ul class="bullet-list"><li><span class="mono">BoardInit()</span> 함수는 하드웨어 관련 초기화를 담당합니다.</li><li>기본 하드웨어 자원을 준비해 두어야 이후 영상 처리와 신경망 추론 모듈이 안정적인 클록과 통신 환경에서 동작할 수 있다고 설명합니다.</li><li>메인 프로그램 CLK 초기화와 개발보드 주변 하드웨어 초기화를 별도 코드 화면으로 제시합니다.</li></ul></div>
+        <div class="grid-2"><div class="fig-box">
+  <div class="fig-note">메인 프로그램의 SYS_Init() 코드입니다. 시스템 클록과 버스 클록을 설정하는 부분입니다.</div>
+  <img class="fig-image" src="./assets/tracker/boardinit-clk.png" alt="메인 프로그램 클록 초기화 코드"/>
+  <div class="fig-cap">메인 프로그램 클록 초기화 코드</div>
+</div><div class="fig-box">
+  <div class="fig-note">BoardInit() 내부 코드입니다. SYS_Init() 호출 뒤 UART와 HyperRAM 초기화를 진행합니다.</div>
+  <img class="fig-image" src="./assets/tracker/boardinit-periph.png" alt="주변장치 초기화 코드"/>
+  <div class="fig-cap">주변장치 초기화 코드</div>
+</div></div>
+        <div class="h2">이미지 캡처</div>
+        <div class="card"><ul class="bullet-list"><li>프레임 버퍼는 버퍼 상태에 따라 조건에 맞는 버퍼를 찾는 구조입니다.</li><li><span class="mono">get_empty_framebuf()</span>는 새로운 영상 데이터를 저장하기 위한 빈 버퍼를 확보할 때 사용합니다.</li></ul></div>
+        <div class="h2">추론 단계</div>
+        <div class="card"><ul class="bullet-list"><li><span class="mono">get_full_framebuf()</span>는 데이터가 채워진 버퍼를 가져와 추론 입력으로 넘깁니다.</li><li>사람 검출 네트워크를 실행한 뒤 결과를 후속 단계로 넘깁니다.</li><li><span class="mono">PresentInferenceResult</span> 함수는 검출된 각 객체의 클래스와 영상 내 위치를 중간 결과로 정리합니다.</li></ul></div>
+        <div class="card card-blue"><p><span class="mono">PresentInferenceResult</span>는 사람 검출의 중간 결과를 정리하는 함수입니다. 각 검출 객체에 대해 클래스 정보와 영상 내 위치를 묶어 후속 후처리 단계가 사용할 수 있는 형태로 넘깁니다.</p><p>즉 추론 네트워크의 출력 텐서를 바로 표시 단계로 보내는 것이 아니라, 이 단계에서 객체별 정보가 한 번 정리됩니다.</p></div>
+        <div class="grid-2"><div class="fig-box">
+  <div class="fig-note">PresentInferenceResult 함수 구현입니다.</div>
+  <img class="fig-image fig-image-wide" src="./assets/tracker/present-inference-code.png?v=20260412-pt2" alt="PresentInferenceResult 코드"/>
+  <div class="fig-cap">PresentInferenceResult 코드</div>
+</div></div>
+        <div class="grid-2"><div class="fig-box">
+  <div class="fig-note">사람 검출 추론을 수행하고 결과를 정리하는 코드입니다.</div>
+  <img class="fig-image" src="./assets/tracker/inference-code.png" alt="사람 검출 추론 코드"/>
+  <div class="fig-cap">사람 검출 추론 코드</div>
+</div><div class="fig-box">
+  <div class="fig-note">추론 결과를 다음 단계로 넘길 때 사용하는 함수 선언부입니다.</div>
+  <img class="fig-image" src="./assets/tracker/inference-decl.png" alt="추론 관련 함수 선언"/>
+  <div class="fig-cap">추론 관련 함수 선언</div>
+</div></div>
+        <div class="h2">후처리 및 결과 그리기</div>
+        <div class="card card-blue"><ol class="step-list"><li>네트워크 출력 박스를 원본 영상 크기로 다시 스케일링합니다.</li><li>출력 텐서에서 경계 상자와 클래스 확률을 추출합니다.</li><li><span class="mono">NMS</span>를 적용해 겹치는 박스를 제거합니다.</li><li>최종 결과를 <span class="mono">resultsOut</span> 벡터에 저장합니다.</li><li><span class="mono">DrawImageDetectionBoxes</span>로 검출 박스와 라벨을 프레임에 그립니다.</li></ol><ul class="bullet-list"><li><span class="mono">InsertTopNDetection</span>은 새로운 검출 결과를 Top-N 리스트에 삽입하고 <span class="mono">objectness</span> 점수 기준으로 정렬합니다.</li><li>파라미터는 <span class="mono">std::forward_list&lt;image::Detection&gt;&amp; detection</span>과 <span class="mono">image::Detection&amp; det</span>입니다.</li><li><span class="mono">DetectorPostprocessing</span>은 YOLO 계열 추론 후처리 로직을 수행하며 특징 맵에서 검출 박스를 추출하고 objectness 기준으로 Top-N 결과를 남깁니다.</li></ul><div class="table-wrap"><table><thead><tr><th>필드</th><th>설명</th></tr></thead><tbody><tr><td><span class="mono">m_normalizedVal</span></td><td>해당 박스가 특정 클래스에 속할 확률, 즉 신뢰도</td></tr><tr><td><span class="mono">m_x0</span>, <span class="mono">m_y0</span></td><td>검출 박스의 좌상단 좌표</td></tr><tr><td><span class="mono">m_w</span>, <span class="mono">m_h</span></td><td>박스의 너비와 높이</td></tr><tr><td><span class="mono">m_cls</span></td><td>검출 결과의 클래스 라벨</td></tr></tbody></table></div></div>
+        <div class="grid-2"><div class="fig-box">
+  <div class="fig-note">InsertTopNDetection 함수 구현입니다.</div>
+  <img class="fig-image fig-image-wide" src="./assets/tracker/insert-topn-code.png" alt="InsertTopNDetection 관련 코드"/>
+  <div class="fig-cap">InsertTopNDetection 관련 코드</div>
+</div><div class="fig-box">
+  <div class="fig-note">DetectorPostprocessing 함수 구현입니다.</div>
+  <img class="fig-image fig-image-wide" src="./assets/tracker/detectorpost-code.png" alt="DetectorPostprocessing 관련 코드"/>
+  <div class="fig-cap">DetectorPostprocessing 관련 코드</div>
+</div></div>
+        <div class="grid-2"><div class="fig-box">
+  <div class="fig-note">DetectionResult 구조 정의입니다.</div>
+  <img class="fig-image fig-image-wide" src="./assets/tracker/detection-struct.png" alt="DetectionResult 구조 코드"/>
+  <div class="fig-cap">DetectionResult 구조 코드</div>
+</div><div class="fig-box">
+  <div class="fig-note">DrawImageDetectionBoxes 함수 구현입니다.</div>
+  <img class="fig-image fig-image-wide" src="./assets/tracker/draw-boxes-code.png" alt="DrawImageDetectionBoxes 관련 코드"/>
+  <div class="fig-cap">DrawImageDetectionBoxes 관련 코드</div>
+</div></div>
+        <div class="h2">결과 표시</div>
+        <div class="card"><p>후처리와 그리기가 끝난 프레임은 LCD에 표시됩니다. 아래 이미지는 최종 검출 박스와 라벨이 화면에 어떻게 나타나는지 보여줍니다.</p></div>
+        <div class="grid-2"><div class="fig-box">
+  <div class="fig-note">LCD에 표시되는 최종 검출 결과 예시입니다.</div>
+  <img class="fig-image fig-image-wide" src="./assets/tracker/display-result.png" alt="검출 결과 표시 예시"/>
+  <div class="fig-cap">검출 결과 표시 예시</div>
+</div></div>
+      </section>
+      <section class="section">
+        <div class="h1 scroll-anchor" id="demo"><span class="num">6</span><span>DEMO</span></div>
+        <div class="h2">DEMO 영상</div>
+        <div class="card"><p>마지막 페이지는 DEMO 영상 섹션이며, 표기 자체는 단순히 <span class="mono">링크</span>입니다.</p><p><a href="https://www.youtube.com/watch?v=fcoDVMUbxHQ" target="_blank" rel="noopener noreferrer">https://www.youtube.com/watch?v=fcoDVMUbxHQ</a></p></div>
+        <div class="grid-2"><div class="fig-box">
+  <div class="fig-note">DEMO 영상의 썸네일입니다. 실제 동작 화면을 미리 확인할 수 있습니다.</div>
+  <img class="fig-image fig-image-wide" src="./assets/tracker/demo-shot.png" alt="DEMO 영상 미리보기 이미지"/>
+  <div class="fig-cap">DEMO 영상 미리보기 이미지</div>
+</div></div>
+      </section>
+    </main>
+  </div>
+  <a class="back-top" href="#top" aria-label="맨 위로">↑</a>
+</body>
+</html>

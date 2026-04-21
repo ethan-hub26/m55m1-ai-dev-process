@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Garbage Classification 한국어 가이드</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=IBM+Plex+Mono:wght@400;600&display=swap');
+    :root {
+      --red:#c8102e; --red-dark:#8c0b1f; --red-light:#fdeaed; --bg:#f4f5f7; --panel:#fff;
+      --text:#1a1a1a; --muted:#6b7280; --border:#e2e4e9; --accent:#0057a8; --green:#00875a;
+      --shadow:0 2px 12px rgba(0,0,0,.08); --shadow-lg:0 8px 24px rgba(0,0,0,.12); --r:10px;
+    }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    html { scroll-behavior:smooth; }
+    body { font-family:'Noto Sans KR',sans-serif; background:var(--bg); color:var(--text); font-size:15px; line-height:1.75; }
+    .site-header { background:linear-gradient(135deg,var(--red-dark),var(--red) 60%,#e63050); color:#fff; padding:38px 40px; position:relative; overflow:hidden; }
+    .site-header::before { content:''; position:absolute; top:-80px; right:-80px; width:320px; height:320px; border-radius:50%; background:rgba(255,255,255,.08); }
+    .hdr-title { font-size:clamp(24px,4vw,40px); font-weight:900; line-height:1.2; position:relative; }
+    .hdr-sub { margin-top:10px; opacity:.88; max-width:920px; position:relative; }
+    .hdr-meta { display:flex; gap:12px; flex-wrap:wrap; margin-top:18px; position:relative; }
+    .meta-chip { background:rgba(255,255,255,.15); border:1px solid rgba(255,255,255,.26); border-radius:999px; padding:5px 13px; font-size:13px; }
+    .layout { display:grid; grid-template-columns:260px 1fr; max-width:1340px; margin:0 auto; }
+    .sidebar { background:var(--panel); border-right:1px solid var(--border); padding:24px 0; position:sticky; top:0; height:100vh; overflow-y:auto; }
+    .sidebar-title { font-size:11px; font-weight:700; letter-spacing:1.5px; color:var(--muted); padding:0 24px 10px; border-bottom:1px solid var(--border); margin-bottom:8px; text-transform:uppercase; }
+    .nav-link { display:block; padding:7px 24px 7px 32px; color:var(--text); text-decoration:none; font-size:13.5px; border-left:3px solid transparent; }
+    .nav-link:hover { background:var(--red-light); border-left-color:var(--red); color:var(--red-dark); }
+    .main { padding:36px 44px; min-width:0; }
+    .section { margin-bottom:56px; }
+    .scroll-anchor { scroll-margin-top:18px; }
+    .h1 { font-size:26px; font-weight:900; color:var(--red-dark); border-bottom:3px solid var(--red); padding-bottom:10px; margin-bottom:22px; display:flex; align-items:center; gap:12px; }
+    .h1 .num { background:var(--red); color:#fff; border-radius:6px; width:34px; height:34px; display:flex; align-items:center; justify-content:center; font-size:15px; font-weight:700; flex-shrink:0; }
+    .h2 { font-size:19px; font-weight:700; color:var(--accent); margin:26px 0 12px; display:flex; align-items:center; gap:8px; }
+    .h2::before { content:''; display:inline-block; width:4px; height:20px; background:var(--accent); border-radius:2px; }
+    .card { background:var(--panel); border:1px solid var(--border); border-radius:var(--r); padding:20px 24px; margin:14px 0; box-shadow:var(--shadow); }
+    .card-red { border-left:4px solid var(--red); background:var(--red-light); }
+    .card-blue { border-left:4px solid var(--accent); background:#eef4ff; }
+    .card-green { border-left:4px solid var(--green); background:#e6f7f1; }
+    .bullet-list, .step-list { margin:10px 0 4px; }
+    .bullet-list { list-style:none; }
+    .bullet-list li { position:relative; padding:5px 0 5px 18px; }
+    .bullet-list li::before { content:'◆'; position:absolute; left:0; color:var(--red); font-size:11px; }
+    .step-list { counter-reset:step; list-style:none; }
+    .step-list li { counter-increment:step; display:flex; gap:14px; align-items:flex-start; padding:12px 0; border-bottom:1px solid var(--border); }
+    .step-list li:last-child { border-bottom:none; }
+    .step-list li::before { content:counter(step); background:var(--red); color:#fff; border-radius:50%; width:26px; height:26px; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; }
+    .table-wrap { overflow-x:auto; margin:14px 0; border-radius:var(--r); box-shadow:var(--shadow); }
+    table { width:100%; border-collapse:collapse; background:var(--panel); }
+    th { background:var(--red); color:#fff; font-size:13px; font-weight:600; padding:10px 14px; text-align:left; }
+    td { padding:9px 14px; font-size:13.5px; border-bottom:1px solid var(--border); vertical-align:top; }
+    tr:last-child td { border-bottom:none; }
+    tr:nth-child(even) td { background:#fafafa; }
+    .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:12px 0; align-items:start; }
+    .fig-box { background:var(--panel); border:1px solid var(--border); border-radius:var(--r); overflow:hidden; box-shadow:var(--shadow-lg); }
+    .fig-note { padding:14px 16px 4px; font-size:14px; line-height:1.7; color:var(--text); }
+    .fig-image { width:100%; height:auto; max-height:440px; display:block; background:#fff; padding:10px; object-fit:contain; }
+    .fig-image-wide { max-height:560px; padding:6px; }
+    .fig-cap { text-align:center; font-size:13px; color:var(--muted); padding:10px; font-style:italic; border-top:1px solid var(--border); background:#fafafa; }
+    .code-block { font-family:'IBM Plex Mono',monospace; background:#10151c; color:#eef4ff; border-radius:var(--r); padding:16px; overflow:auto; font-size:13px; line-height:1.65; margin:12px 0; }
+    .mono { font-family:'IBM Plex Mono',monospace; }
+    p { margin-bottom:10px; }
+    .back-top { position:fixed; right:24px; bottom:24px; background:var(--red); color:#fff; border-radius:50%; width:44px; height:44px; display:flex; align-items:center; justify-content:center; font-size:20px; text-decoration:none; box-shadow:0 4px 16px rgba(200,16,46,.4); }
+    @media (max-width:900px) { .layout { grid-template-columns:1fr; } .sidebar { position:static; height:auto; } .main { padding:20px 16px; } .grid-2 { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <div class="site-header" id="top">
+    <div class="hdr-title">Garbage Classification 한국어 가이드</div>    
+    <div class="hdr-meta">
+    </div>
+  </div>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="sidebar-title">Contents</div>
+      <a class="nav-link" href="#quickstart">0. Quick Start</a>
+<a class="nav-link" href="#overview">1. 사례 개요</a>
+<a class="nav-link" href="#dataset">2. 데이터셋과 LabelImg</a>
+<a class="nav-link" href="#training">3. PC 학습 및 모델 변환</a>
+<a class="nav-link" href="#software">4. 임베디드 소프트웨어 흐름</a>
+<a class="nav-link" href="#demo">5. DEMO</a>
+    </aside>
+    <main class="main">
+      <section class="section">
+        <div class="h1 scroll-anchor" id="quickstart"><span class="num">0</span><span>Quick Start</span></div>
+        <div class="card card-blue">
+          <ul class="bullet-list">
+            <li>주제: Nuvoton M55M1 보드에서 4종 폐기물을 분류하는 임베디드 비전 데모</li>
+            <li>인식 클래스: <span class="mono">Paper</span>, <span class="mono">Plastic Bottle</span>, <span class="mono">Aluminum Can</span>, <span class="mono">Paper Cup</span></li>
+            <li>모델: <span class="mono">YOLOX-Nano</span>, 모델 크기 2MB 이하</li>
+            <li>성능: 기준 4종 분류 정확도 90.1%</li>
+            <li>변환 경로: <span class="mono">PyTorch → ONNX → TensorFlow Lite → Vela</span></li>
+          </ul>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>대목차</th><th>HTML 반영 내용</th></tr></thead>
+            <tbody>
+              <tr><td>사례 소개</td><td>프로젝트 개요, 기대 결과, 실제 성능</td></tr>
+              <tr><td>자료집/모델 훈련</td><td>데이터 수집, LabelImg, yolo2cocojson, 학습 사양, 환경 구축</td></tr>
+              <tr><td>PC 학습</td><td>YOLOX 훈련, ONNX, ONNX to TFLite, Vela</td></tr>
+              <tr><td>C++ 소프트웨어 흐름</td><td>BoardInit, InferenceTask, DetectorPostProcessing, Main loop</td></tr>
+              <tr><td>DEMO</td><td>링크 반영</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="h1 scroll-anchor" id="overview"><span class="num">1</span><span>사례 개요</span></div>
+        <div class="card card-red">
+          <p>이 프로젝트는 M55M1 개발 보드와 카메라 모듈을 이용해 생활 쓰레기를 실시간으로 인식하고, 화면에 분류 결과를 즉시 표시하는 데모입니다. 가정 환경에서 아이가 헷갈리기 쉬운 종이류, 플라스틱 병, 알루미늄 캔, 종이컵을 자동으로 구분하는 것이 목표입니다.</p>
+          <p>TinyML 관점에서 경량 객체 탐지 모델을 보드에 배포하는 전체 흐름을 다룹니다. 즉, 데이터 수집과 라벨링, PC 학습, 모델 변환, 보드 추론, 화면 표시까지를 하나의 사례로 묶어 설명합니다.</p>
+        </div>
+        <div class="h2">사례 소개와 기대 결과</div>
+        <div class="card">
+          <ul class="bullet-list">
+            <li>M55M1에서 실행 가능한 크기를 맞추기 위해 <span class="mono">YOLOX_Nano_ti_lite_nu</span> 계열 모델을 사용</li>
+            <li>외부 HyperRAM 없이도 탑재 가능한 2MB 이하 모델을 목표로 구성</li>
+            <li>카메라 프레임을 받아 객체 탐지 후 클래스와 위치를 화면에 바로 출력</li>
+            <li>4종 분류 정확도가 <span class="mono">90.1%</span>라고 명시합니다.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <p>예시는 종이류, 플라스틱 병, 알루미늄 캔, 종이컵을 동시에 인식하고 즉시 분류하는 장면을 보여줍니다. 즉 단일 클래스 판별이 아니라 여러 생활 폐기물을 한 화면에서 동시 검출하는 데 초점을 둔 사례입니다.</p>
+        </div>
+        <div class="grid-2"><div class="fig-box">
+  <div class="fig-note">M55M1 보드의 폐기물 분류 결과 화면입니다.</div>
+  <img class="fig-image fig-image-wide" src="./assets/garbage/result-photo.png" alt="M55M1 보드에서 여러 폐기물을 동시에 인식하는 결과 예시"/>
+  <div class="fig-cap">M55M1 보드에서 여러 폐기물을 동시에 인식하는 결과 예시</div>
+</div></div>
+      </section>
+
+      <section class="section">
+        <div class="h1 scroll-anchor" id="dataset"><span class="num">2</span><span>데이터셋과 LabelImg</span></div>
+        <div class="card">
+          <p>자체 촬영한 약 400장의 쓰레기 사진으로 데이터셋을 만들고, <span class="mono">LabelImg</span>로 YOLO 형식 라벨을 작성한 뒤 학습용으로 <span class="mono">COCO JSON</span> 형식으로 변환하는 절차를 설명합니다.</p>
+        </div>
+        <div class="table-wrap"><table><thead><tr><th>항목</th><th>내용</th></tr></thead><tbody><tr><td>클래스</td><td>Paper, Plastic Bottle, Aluminum Can, Paper Cup</td></tr><tr><td>학습 이미지</td><td>Train 378장 / Valid 36장 / Test 19장</td></tr><tr><td>라벨링 도구</td><td>LabelImg</td></tr><tr><td>데이터 포맷</td><td>YOLO 라벨링 후 COCO JSON으로 변환</td></tr><tr><td>모델</td><td>YOLOX-Nano (Light Model)</td></tr></tbody></table></div>
+        <div class="h2">데이터 수집</div>
+        <div class="card">
+          <ol class="step-list">
+            <li>직접 촬영한 사진을 충분히 모읍니다. 예시는 약 400장을 사용합니다.</li>
+            <li><span class="mono">LabelImg</span>로 라벨링을 진행합니다.</li>
+            <li>학습 형식이 프로젝트 요구와 같은지 확인합니다. 이번 사례는 최종적으로 <span class="mono">COCO JSON</span>을 사용합니다.</li>
+            <li>필요하면 원래 YOLO 형식 라벨을 COCO JSON으로 변환합니다.</li>
+          </ol>
+        </div>
+        <div class="h2">LabelImg와 yolo2cocojson</div>
+        <div class="card">
+          <ol class="step-list">
+            <li>링크에서 <span class="mono">labelImg.exe</span>를 내려받습니다.</li>
+            <li>실행 후 데이터셋 위치와 저장 위치를 먼저 지정합니다.</li>
+            <li>LabelImg 저장 형식 중 이번 프로젝트는 <span class="mono">YOLO</span> 형식을 사용합니다.</li>
+            <li><span class="mono">label.txt</span>에 클래스 목록을 정의한 뒤 <span class="mono">Create RectBox</span>로 라벨링합니다.</li>
+            <li>YOLO 라벨 완료 후 <span class="mono">yolo2cocojson.py</span>로 COCO JSON으로 변환합니다.</li>
+          </ol>
+        </div>
+        <div class="card card-green">
+          <p>링크: <a href="https://github.com/tzutalin/labelImg/releases" target="_blank" rel="noopener noreferrer">LabelImg Releases</a>, <a href="https://drive.google.com/file/d/15cSq0MiBjgwUIwJn0Z_0t2c51vUY2jh6/view?usp=sharing" target="_blank" rel="noopener noreferrer">yolo2cocojson.py</a></p>
+        </div>
+        <div class="grid-2"><div class="fig-box">
+  <div class="fig-note">LabelImg 다운로드 페이지입니다.</div>
+  <img class="fig-image" src="./assets/garbage/labelimg-download.png" alt="LabelImg 다운로드 페이지"/>
+  <div class="fig-cap">LabelImg 다운로드 페이지</div>
+</div><div class="fig-box">
+  <div class="fig-note">이미지 폴더와 라벨 저장 폴더를 지정하는 화면입니다.</div>
+  <img class="fig-image" src="./assets/garbage/labelimg-open.png" alt="LabelImg에서 이미지 폴더와 저장 위치를 지정하는 화면"/>
+  <div class="fig-cap">LabelImg에서 이미지 폴더와 저장 위치를 지정하는 화면</div>
+</div></div>
+        <div class="grid-2"><div class="fig-box">
+  <div class="fig-note">라벨링 박스를 시작하는 버튼입니다.</div>
+  <img class="fig-image" src="./assets/garbage/rectbox-button.png" alt="Create RectBox 버튼"/>
+  <div class="fig-cap">Create RectBox 버튼</div>
+</div><div class="fig-box">
+  <div class="fig-note">새 라벨 이름을 입력하는 창입니다.</div>
+  <img class="fig-image" src="./assets/garbage/label-dialog.png" alt="라벨 이름을 입력하는 팝업"/>
+  <div class="fig-cap">라벨 이름을 입력하는 팝업</div>
+</div></div>
+        <div class="grid-2"><div class="fig-box">
+  <div class="fig-note">기존 클래스 이름을 재사용하는 목록입니다.</div>
+  <img class="fig-image" src="./assets/garbage/label-list.png" alt="기존 라벨 목록을 재사용하는 화면"/>
+  <div class="fig-cap">기존 라벨 목록을 재사용하는 화면</div>
+</div><div class="fig-box">
+  <div class="fig-note">클래스 이름과 ID를 맞추는 설정 예시입니다.</div>
+  <img class="fig-image" src="./assets/garbage/yolo2coco-class.png" alt="YOLO 클래스 이름과 ID를 맞추는 예시"/>
+  <div class="fig-cap">YOLO 클래스 이름과 ID를 맞추는 예시</div>
+</div></div>
+        <div class="grid-2"><div class="fig-box">
+  <div class="fig-note">이미지 폴더와 라벨 폴더 경로를 지정하는 설정입니다.</div>
+  <img class="fig-image" src="./assets/garbage/yolo2coco-path.png" alt="이미지와 라벨 폴더 경로를 지정하는 예시"/>
+  <div class="fig-cap">이미지와 라벨 폴더 경로를 지정하는 예시</div>
+</div></div>
+        <div class="h2">데이터셋 준비 메모</div>
+        <div class="card card-green">
+          <ul class="bullet-list">
+            <li>이미지 수가 많을수록 학습 성능이 좋아진다고 설명합니다.</li>
+            <li>학습 프레임워크가 요구하는 형식과 라벨 포맷이 일치하는지 먼저 확인해야 합니다.</li>
+            <li>이번 사례는 최종 학습 입력을 <span class="mono">COCO JSON</span>으로 맞추는 구성이므로, YOLO 라벨을 그대로 사용하지 않고 변환 단계를 둡니다.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="h1 scroll-anchor" id="training"><span class="num">3</span><span>PC 학습 및 모델 변환</span></div>
+        <div class="card card-red">
+          <p>PC에서는 <span class="mono">Anaconda</span> 기반 가상환경을 만들고 <span class="mono">PyTorch</span>와 <span class="mono">MMCV</span>를 설치한 뒤, <span class="mono">YOLOX-Nano</span>를 학습합니다. 이후 <span class="mono">ONNX</span>와 <span class="mono">TensorFlow Lite</span>를 거쳐 <span class="mono">Vela</span> 최적화 모델을 생성합니다.</p>
+        </div>
+        <div class="h2">훈련 장비</div>
+        <div class="table-wrap"><table><thead><tr><th>항목</th><th>값</th></tr></thead><tbody><tr><td>GPU</td><td>NVIDIA GTX 1080 Ti</td></tr><tr><td>CUDA</td><td>11.8</td></tr><tr><td>PyTorch</td><td>2.0.0</td></tr><tr><td>Python</td><td>3.10</td></tr><tr><td>학습 시간</td><td>약 1.5시간</td></tr></tbody></table></div>
+        <div class="card">
+          <p>GPU 사양에 맞는 CUDA와 Torch 버전을 먼저 정하고, 이후 Python 3.10과 Anaconda를 이용해 환경을 구성하라고 설명합니다. 예시 장비는 <span class="mono">GTX 1080 Ti</span>입니다.</p>
+        </div>
+        <div class="h2">환경 구성 명령</div>
+        <div class="card"><pre class="code-block">conda create --name yolox_nu python=3.10
+conda activate yolox_nu
+gh repo clone MaxCYCHEN/yolox-ti-lite_tflite_int8
+python -m pip install --upgrade pip setuptools
+python -m pip install mmcv==2.0.1 -f https://download.openmmlab.com/mmcv/dist/cu118/torch2.0/index.html
+python -m pip install --no-input -r requirements.txt
+python setup.py develop</pre></div>
+        <div class="card card-green">
+          <p>링크: <a href="https://www.anaconda.com/download" target="_blank" rel="noopener noreferrer">Anaconda Download</a>, <a href="https://download.openmmlab.com/mmcv/dist/cu118/torch2.0/index.html" target="_blank" rel="noopener noreferrer">MMCV cu118 / torch2.0</a></p>
+        </div>
+        <div class="h2">데이터셋 구조와 학습 파라미터</div>
+        <div class="card">
+          <p><span class="mono">annotations</span>, <span class="mono">train2017</span>, <span class="mono">val2017</span> 구조를 기준으로 학습 경로를 맞추도록 설명합니다.</p>
+        </div>
+        <div class="grid-2"><div class="fig-box">
+  <div class="fig-note">학습 데이터셋 디렉터리 구조입니다.</div>
+  <img class="fig-image" src="./assets/garbage/dataset-structure.png" alt="학습용 데이터셋 디렉터리 구조"/>
+  <div class="fig-cap">학습용 데이터셋 디렉터리 구조</div>
+</div></div>
+        <div class="table-wrap"><table><thead><tr><th>항목</th><th>설명</th></tr></thead><tbody><tr><td>입력 이미지 크기</td><td>프로젝트 설정에 맞게 조정</td></tr><tr><td>클래스 수</td><td>4개</td></tr><tr><td>권장 epoch</td><td>150~200</td></tr><tr><td>배치 크기</td><td>64</td></tr><tr><td>모델 크기</td><td>2MB 이하, YOLOX_Nano_ti_lite_nu 약 0.91MB</td></tr></tbody></table></div>
+        <div class="card">
+          <p>에서 강조하는 조정 포인트는 입력 이미지 크기, 클래스 수, epoch 수입니다. 특히 epoch를 과도하게 늘리면 <span class="mono">overfitting</span>이 발생할 수 있어, 150~200 수준에서 검증하며 조정하는 흐름을 제시합니다.</p>
+        </div>
+        <div class="h2">YOLOX_Nano 학습 명령</div>
+        <div class="card"><pre class="code-block">python tools/train.py -f exps/default/yolox_nano_ti_lite_nu.py -d 1 -b 64 --fp16 -o -c           pretrain/tflite_yolox_nano_ti/320_DW/yolox_nano_320_DW_ti_lite.pth</pre></div>
+        <div class="h2">모델 변환과 Vela</div>
+        <div class="card"><pre class="code-block">python tools/export_onnx.py -f exps/default/yolox_nano_ti_lite_nu.py -c           YOLOX_outputs/yolox_nano_ti_lite_nu/latest_ckpt.pth --output-name           YOLOX_outputs/yolox_nano_ti_lite_nu/yolox_nano_nu_garbage.onnx
+
+onnx2tf -i YOLOX_outputs/yolox_nano_ti_lite_nu/yolox_nano_nu_garbage.onnx -oiqt           -qcind images YOLOX_outputs\yolox_nano_ti_lite_nu\calib_data_320x320_n200.npy           &quot;[[[[0,0,0]]]]&quot; &quot;[[[[1,1,1]]]]&quot;
+
+set MODEL_SRC_FILE=yolox_nano_ti_lite_nu_full_integer_quant.tflite
+set MODEL_OPTIMISE_FILE=yolox_nano_ti_lite_nu_full_integer_quant_vela.tflite</pre></div>
+        <div class="card card-green">
+          <ul class="bullet-list">
+            <li><span class="mono">export_onnx.py</span>는 학습된 <span class="mono">.pth</span> 체크포인트를 ONNX로 내보냅니다.</li>
+            <li><span class="mono">onnx2tf</span>는 ONNX를 정수 양자화된 TFLite로 바꾸며, 보정용 <span class="mono">.npy</span> 데이터가 함께 사용됩니다.</li>
+            <li><span class="mono">Vela</span>는 Ethos-U NPU에 맞는 배포용 TFLite를 생성합니다.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="h1 scroll-anchor" id="software"><span class="num">4</span><span>임베디드 소프트웨어 흐름</span></div>
+        <div class="card">
+          <p>후반부는 <span class="mono">BoardInit.cpp</span>, <span class="mono">InferenceTask.cpp</span>, <span class="mono">DetectorPostProcessing.cpp</span>, <span class="mono">Main.cpp</span>를 중심으로 보드 초기화부터 추론 결과 표시까지를 설명합니다.</p>
+        </div>
+        <div class="h2">System Initialization</div>
+        <div class="card">
+          <p><span class="mono">BoardInit.cpp</span>와 <span class="mono">mpu_config_M55M1.h</span> 구간은 보드 구동에 필요한 초기화 흐름을 단계별로 설명합니다. 핵심은 시스템 클록과 모듈 클록 설정, UART6 디버그 포트 준비, HyperRAM 통신 포트 초기화, Arm Ethos-U NPU 초기화, 보호 레지스터 재잠금까지를 한 번에 끝내는 것입니다.</p>
+        </div>
+        <div class="h2">클록과 모듈 클록 초기화</div>
+        <div class="card">
+          <ul class="bullet-list">
+            <li>내부 및 외부 오실레이터를 활성화하고 안정화될 때까지 대기합니다.</li>
+            <li><span class="mono">APLL</span>을 시스템 클록 소스로 사용하며 동작 주파수는 <span class="mono">180 MHz</span>입니다.</li>
+            <li>카메라, 메모리, 통신, 디버그 출력에 필요한 하드웨어 모듈 클록을 순차적으로 켭니다.</li>
+          </ul>
+        </div>
+        <div class="h2">UART와 HyperRAM 초기화</div>
+        <div class="card">
+          <ul class="bullet-list">
+            <li><span class="mono">UART6</span>을 디버그용 직렬 포트로 지정해 <span class="mono">printf</span> 기반 로그를 출력할 수 있게 합니다.</li>
+            <li>UART 클록 소스와 멀티펑션 핀을 함께 설정해 콘솔 출력 경로를 완성합니다.</li>
+            <li><span class="mono">HyperRAM</span>은 통신 포트를 초기화한 뒤 <span class="mono">Direct Map</span> 모드로 진입해 접근 효율을 높입니다.</li>
+          </ul>
+          <pre class="code-block">SetDebugUartCLK();
+SetDebugUartMFP();
+InitDebugUart();
+
+HyperRAM_PinConfig(HYPERRAM_SPIM_PORT);
+HyperRAM_Init(HYPERRAM_SPIM_PORT);
+SPIM_HYPER_EnterDirectMapMode(HYPERRAM_SPIM_PORT);</pre>
+        </div>
+        <div class="h2">Arm Ethos-U NPU 초기화</div>
+        <div class="card">
+          <ul class="bullet-list">
+            <li>Arm NPU 사용이 활성화된 경우 초기화 함수를 호출하고 정상 상태를 확인합니다.</li>
+            <li>이 단계가 완료되어야 양자화된 객체 검출 모델이 임베디드 보드에서 안정적으로 동작합니다.</li>
+            <li>초기화 전에는 보호 레지스터 잠금을 해제하고, 모든 설정이 끝난 뒤 다시 잠가 보안 상태를 복원합니다.</li>
+            <li><span class="mono">info</span> 로그를 통해 초기화 완료 메시지를 남기도록 설명합니다.</li>
+          </ul>
+        </div>
+        <div class="h2">InferenceTask.cpp</div>
+        <div class="card">
+          <p>추론 태스크는 FreeRTOS 큐를 통해 입력 프레임을 받고, 모델 실행 후 출력 Tensor를 후처리기로 넘깁니다. <span class="mono">RunInference</span>, <span class="mono">GetOutputTensor</span>, <span class="mono">xQueueReceive</span>, <span class="mono">xQueueSend</span>를 핵심 호출로 짚습니다.</p>
+          <pre class="code-block">bool runInf = m_model-&gt;RunInference();
+TfLiteTensor *modelOutput0 = m_model-&gt;GetOutputTensor(0);
+pPostProc-&gt;RunPostProcessing(...);
+xQueueReceive(...);
+xQueueSend(...);</pre>
+        </div>
+        <div class="grid-2"><div class="fig-box">
+  <div class="fig-note">RunInference 호출 흐름입니다.</div>
+  <img class="fig-image" src="./assets/garbage/inference-run.png" alt="RunInference 호출 예시"/>
+  <div class="fig-cap">RunInference 호출 예시</div>
+</div><div class="fig-box">
+  <div class="fig-note">FreeRTOS 큐 기반 추론 태스크 구조입니다.</div>
+  <img class="fig-image" src="./assets/garbage/freertos-queue.png" alt="FreeRTOS 큐 기반 추론 태스크 구조"/>
+  <div class="fig-cap">FreeRTOS 큐 기반 추론 태스크 구조</div>
+</div></div>
+        <div class="h2">DetectorPostProcessing.cpp</div>
+        <div class="card">
+          <p>후처리는 모델 출력 Tensor를 구조화된 검출 결과로 바꾸는 단계입니다. 여기서는 후처리 파라미터 설정, Tensor 해석, NMS, 원본 이미지 좌표 복원, 최종 결과 구조 생성까지를 순서대로 수행합니다.</p>
+        </div>
+        <div class="card">
+          <p>후처리 초기화 구간에서는 검출 결과를 얼마나 남길지와 중복 박스를 어떻게 제거할지 결정하는 파라미터를 설정합니다.</p>
+          <pre class="code-block">threshold: confidence threshold
+nms: IoU threshold for non-max suppression
+numClasses: number of garbage classes
+topN: maximum number of returned detections</pre>
+        </div>
+        <div class="table-wrap"><table><thead><tr><th>파라미터</th><th>의미</th></tr></thead><tbody><tr><td><span class="mono">threshold</span></td><td>검출 신뢰도 하한값이며 이 값보다 낮은 박스는 무시합니다.</td></tr><tr><td><span class="mono">nms</span></td><td>IoU 기준의 중복 제거 임계값입니다.</td></tr><tr><td><span class="mono">numClasses</span></td><td>모델이 지원하는 폐기물 클래스 수입니다.</td></tr><tr><td><span class="mono">topN</span></td><td>최종 반환할 최대 결과 개수입니다.</td></tr></tbody></table></div>
+        <div class="h2">후처리 실행</div>
+        <div class="card">
+          <ul class="bullet-list">
+            <li>YOLO 출력 Tensor를 구조화된 네트워크 결과로 초기화합니다.</li>
+            <li><span class="mono">modelOutput0</span>에는 경계 상자 좌표와 클래스 정보가 함께 들어 있습니다.</li>
+            <li>양자화 모델 출력값을 다시 사용하기 위해 <span class="mono">scale</span>과 <span class="mono">zeroPoint</span>를 적용합니다.</li>
+          </ul>
+        </div>
+        <div class="h2">검출 박스 해석과 NMS</div>
+        <div class="card">
+          <ul class="bullet-list">
+            <li>모델 출력에서 각 박스의 좌표, 크기, 신뢰도를 꺼내고 <span class="mono">threshold</span>를 넘는 후보만 남깁니다.</li>
+            <li>후보 좌표는 모델 입력 비율 기준이므로 이후 원본 영상 비율로 다시 환산해야 합니다.</li>
+            <li><span class="mono">NMS</span> 단계에서는 IoU가 높게 겹치는 박스를 제거하고 가장 신뢰도 높은 결과만 유지합니다.</li>
+            <li>이 과정을 거쳐 각 객체가 하나의 대표 박스로 정리됩니다.</li>
+          </ul>
+        </div>
+        <div class="h2">원본 이미지 좌표 복원과 결과 구조</div>
+        <div class="card">
+          <ul class="bullet-list">
+            <li>모델 출력 박스를 원본 이미지 크기로 되돌려 실제 화면 좌표로 변환합니다.</li>
+            <li>최종 결과 구조에는 <span class="mono">m_x0</span>, <span class="mono">m_y0</span>, <span class="mono">m_w</span>, <span class="mono">m_h</span>가 저장됩니다.</li>
+            <li>신뢰도는 <span class="mono">m_normalisedVal</span>, 클래스는 <span class="mono">m_cls</span>에 저장됩니다.</li>
+          </ul>
+        </div>
+        <div class="h2">Main.cpp</div>
+        <div class="card">
+          <p>메인 루프는 데이터 준비, 추론 실행, 후처리, 결과 표시를 반복하는 제어 중심부입니다. 프레임 버퍼 상태를 검사하고, 준비가 끝난 프레임만 추론 태스크로 넘긴 뒤, 후처리 결과를 화면에 그립니다.</p>
+          <pre class="code-block">get_empty_framebuf();
+get_full_framebuf();
+get_inf_framebuf();
+imlib_nvt_scale(...);
+DrawImageDetectionBoxes(...);
+PresentInferenceResult(...);
+vTaskDelay(1);</pre>
+        </div>
+        <div class="h2">메인 루프 흐름</div>
+        <div class="card">
+          <ol class="step-list">
+            <li>새 프레임이 들어왔는지 확인하고 비어 있는 버퍼와 가득 찬 버퍼를 찾습니다.</li>
+            <li>준비된 프레임이 있으면 추론 태스크로 전달하고 <span class="mono">RunInference()</span> 완료를 기다립니다.</li>
+            <li>후처리에서는 NMS, 좌표 복원, 유효 결과 선별을 수행합니다.</li>
+            <li>완성된 결과를 LCD나 직렬 출력 장치에 표시하고, 처리된 버퍼 상태를 다시 비웁니다.</li>
+          </ol>
+        </div>
+        <div class="grid-2"><div class="fig-box">
+  <div class="fig-note">입력 이미지를 모델 크기에 맞게 조정하는 코드입니다.</div>
+  <img class="fig-image" src="./assets/garbage/image-scale.png" alt="입력 이미지를 모델 크기에 맞게 스케일링하는 코드"/>
+  <div class="fig-cap">입력 이미지를 모델 크기에 맞게 스케일링하는 코드</div>
+</div><div class="fig-box">
+  <div class="fig-note">검출 결과를 화면에 그리는 호출부입니다.</div>
+  <img class="fig-image" src="./assets/garbage/draw-box.png" alt="추론 결과를 화면에 그리는 함수 호출"/>
+  <div class="fig-cap">추론 결과를 화면에 그리는 함수 호출</div>
+</div></div>
+        <div class="card">
+          <p>오류가 발생하면 무조건 처음부터 다시 시작하는 구조가 아니라, 문제 성격에 따라 적절한 단계로 되돌아가 재시도하도록 설명합니다.</p>
+          <ul class="bullet-list">
+            <li>프레임 데이터가 손상되었거나 비어 있으면 데이터 준비 단계로 돌아갑니다.</li>
+            <li>모델 초기화나 추론 실행이 실패하면 모델을 다시 준비하고 추론 태스크를 재시작합니다.</li>
+            <li>후처리 파라미터가 맞지 않으면 입력 파라미터나 출력 Tensor 설정을 다시 조정합니다.</li>
+          </ul>
+        </div>
+        <div class="h2">프레임 버퍼와 모델 초기화</div>
+        <div class="card">
+          <ul class="bullet-list">
+            <li><span class="mono">get_empty_framebuf()</span>는 새 이미지 데이터를 채울 수 있는 버퍼를 찾습니다.</li>
+            <li><span class="mono">get_full_framebuf()</span>는 추론 가능한 입력 프레임을 찾습니다.</li>
+            <li><span class="mono">get_inf_framebuf()</span>는 현재 추론 중인 버퍼를 추적합니다.</li>
+            <li>메인 루프 시작 전에는 YOLO 모델을 초기화하고 Tensor 버퍼를 할당한 뒤 모델 길이와 메타정보를 로드합니다.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="h1 scroll-anchor" id="demo"><span class="num">5</span><span>DEMO</span></div>
+        <div class="card card-blue">
+          <p>마지막 장은 DEMO 영상 링크입니다. 카메라 입력을 받아 실시간으로 폐기물 클래스를 판단하고, 화면에 검출 박스와 분류 결과를 함께 표시하는 흐름을 확인할 수 있습니다.</p>
+          <p><a href="https://www.youtube.com/watch?v=xsTSEJoDLxI" target="_blank" rel="noopener noreferrer">DEMO 영상 보기</a></p>
+        </div>
+      </section>
+    </main>
+  </div>
+  <a class="back-top" href="#top" aria-label="맨 위로 이동">↑</a>
+</body>
+</html>

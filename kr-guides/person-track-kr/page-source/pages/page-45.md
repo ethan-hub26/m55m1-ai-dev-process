@@ -1,0 +1,18 @@
+# Page 45
+
+- PDF ???: `45`
+- ?? ??: DrawImageDetectionBoxes ??? ?? ???? ???. NuDeveloper Ecosystem – Make engineers’ jobs easier.
+- PDF ? ??? ?: `3`
+- ?? ??: DrawImageDetectionBoxes ??? ?? ???? ???.
+- `draw-boxes-code` -> `draw-boxes-code.png` : DrawImageDetectionBoxes 관련 코드
+- HTML ?? ??: `covered`
+- ?? ??: DrawImageDetectionBoxes ??? ?? ???? ???.
+
+## Extracted Text
+- NuDeveloper Ecosystem – Make engineers’ jobs easier.
+- Copyright © 2025 Nuvoton Technology Corporation
+- 45
+- (四)後處理
+- DrawImageDetectionBoxes 函式
+- 。函式會在偵測到的物件位置上繪製偵測框，並顯示標籤，將物件偵測
+- 的結果以視覺化的方式呈現出來。

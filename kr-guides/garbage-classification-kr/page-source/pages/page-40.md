@@ -1,0 +1,49 @@
+# Page 40
+
+- PDF 페이지: `40`
+- 제목 추정: 
+- PDF 내 이미지 수: `2`
+- 연결 자산:
+- 없음
+- HTML 반영 상태: `pending`
+- 확인 메모: 
+
+## Extracted Text
+- NuDeveloper Ecosystem – Make engineers’ jobs easier.
+- Copyright © 2025 Nuvoton Technology Corporation
+- 
+- 流程與主循環的對應位置
+- 
+- 接收數據(回到資料準備(Data Preparation) 階段)
+- 。
+- 主循環檢查是否有新的數據需要處理，並嘗試從緩衝區獲取完整的幀圖像(frame buffer)。
+- 。
+- 若緩衝區中存在數據，則進行進一步的處理：
+- 。
+- 獲取空閒緩衝區(get_empty_framebuf())。
+- 。
+- 獲取完整緩衝區(get_full_framebuf())。
+- 
+- 推論執行(回到模型推論(Model Inference) 階段)
+- 。
+- 當緩衝區的數據準備就緒，將數據發送給推論任務：使用TensorFlow Lite 模型執行推論(RunInference() 方法)。
+- 。
+- 主循環等待推論結果。
+- 
+- 結果後處理(回到後處理(Post-processing) 階段)
+- 。
+- 推論完成後，對輸出數據進行後處理，執行：
+- 。
+- 非極大值抑制（NMS）。
+- 。
+- 將座標從模型輸出空間轉換到原始圖像空間。
+- 。
+- 篩選有效的檢測結果。
+- 
+- 顯示與結果輸出(對應流程：回到結果處理與輸出(Result Handling & Output) 階段)
+- 。
+- 將後處理完成的檢測結果顯示在輸出設備（如LCD屏幕或串口）。
+- 。
+- 更新結果緩衝區狀態（如設置為eFRAMEBUF_EMPTY 表示處理完成）。
+- 40
+- (五) Main.cpp關鍵程式解析

@@ -1,0 +1,513 @@
+{
+  "pdf": "h:\\ebk\\Bsp\\M55M1-eBook-Sample-Code-master\\Doc\\垃圾分類.pdf",
+  "page_start": 1,
+  "page_end": 46,
+  "pages": [
+    {
+      "page": 1,
+      "title_guess": "| Photo by Jeffery Cheng",
+      "image_count": 3,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-01.md",
+      "status": "covered",
+      "review_note": "?? ??? ?? ??? ??? ???."
+    },
+    {
+      "page": 2,
+      "title_guess": "陸、智慧居家-垃圾分類",
+      "image_count": 2,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-02.md",
+      "status": "covered",
+      "review_note": "?? ??? HTML ?? ??? ???."
+    },
+    {
+      "page": 3,
+      "title_guess": "(一) 案例介紹– 垃圾分類",
+      "image_count": 2,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-03.md",
+      "status": "covered",
+      "review_note": "??, ????, ??, ?? ??? ??? ???."
+    },
+    {
+      "page": 4,
+      "title_guess": "簡介及應用–",
+      "image_count": 3,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-04.md",
+      "status": "covered",
+      "review_note": "??, ????, ??, ?? ??? ??? ???."
+    },
+    {
+      "page": 5,
+      "title_guess": "對於四種垃圾辨識準確率達到90.1%，分別為紙類、塑膠頻、鋁罐、紙杯。",
+      "image_count": 3,
+      "asset_ids": [
+        "result-photo"
+      ],
+      "asset_files": [
+        "result-photo.png"
+      ],
+      "file": "pages/page-05.md",
+      "status": "covered",
+      "review_note": "??, ????, ??, ?? ??? ??? ???."
+    },
+    {
+      "page": 6,
+      "title_guess": "• LabelImg",
+      "image_count": 2,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-06.md",
+      "status": "covered",
+      "review_note": "??, ????, ??, ?? ??? ??? ???."
+    },
+    {
+      "page": 7,
+      "title_guess": "(一) 資料集蒐集",
+      "image_count": 2,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-07.md",
+      "status": "covered",
+      "review_note": "??, ????, ??, ?? ??? ??? ???."
+    },
+    {
+      "page": 8,
+      "title_guess": "資料集透過自行蒐集的照片來進行訓練",
+      "image_count": 2,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-08.md",
+      "status": "covered",
+      "review_note": "??, ????, ??, ?? ??? ??? ???."
+    },
+    {
+      "page": 9,
+      "title_guess": "STEP1 : 下載此連結，點擊連結內為labelImg.exe",
+      "image_count": 3,
+      "asset_ids": [
+        "labelimg-download"
+      ],
+      "asset_files": [
+        "labelimg-download.png"
+      ],
+      "file": "pages/page-09.md",
+      "status": "covered",
+      "review_note": "??, ????, ??, ?? ??? ??? ???."
+    },
+    {
+      "page": 10,
+      "title_guess": "STEP2 : 打開後要選取資料集位址，以及要儲存的位址",
+      "image_count": 4,
+      "asset_ids": [
+        "labelimg-open"
+      ],
+      "asset_files": [
+        "labelimg-open.png"
+      ],
+      "file": "pages/page-10.md",
+      "status": "covered",
+      "review_note": "??, ????, ??, ?? ??? ??? ???."
+    },
+    {
+      "page": 11,
+      "title_guess": "STEP3:選取要儲存的labelimg格式，分別為PascalVOC、YOLO、",
+      "image_count": 5,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-11.md",
+      "status": "covered",
+      "review_note": "??, ????, ??, ?? ??? ??? ???."
+    },
+    {
+      "page": 12,
+      "title_guess": "STEP4: 設定標註的種類並進行標註",
+      "image_count": 6,
+      "asset_ids": [
+        "rectbox-button",
+        "label-dialog",
+        "label-list"
+      ],
+      "asset_files": [
+        "rectbox-button.png",
+        "label-dialog.png",
+        "label-list.png"
+      ],
+      "file": "pages/page-12.md",
+      "status": "covered",
+      "review_note": "??, ????, ??, ?? ??? ??? ???."
+    },
+    {
+      "page": 13,
+      "title_guess": "STEP5:使用yolo格式全部標註完以後，透過一段python程式將原本",
+      "image_count": 4,
+      "asset_ids": [
+        "yolo2coco-class",
+        "yolo2coco-path"
+      ],
+      "asset_files": [
+        "yolo2coco-class.png",
+        "yolo2coco-path.png"
+      ],
+      "file": "pages/page-13.md",
+      "status": "covered",
+      "review_note": "??, ????, ??, ?? ??? ??? ???."
+    },
+    {
+      "page": 14,
+      "title_guess": "GPU => Nvidia GTX 1080 ti(可以透過指令來得知自身顯卡規格)",
+      "image_count": 3,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-14.md",
+      "status": "covered",
+      "review_note": "??, ????, ??, ?? ??? ??? ???."
+    },
+    {
+      "page": 15,
+      "title_guess": "安裝anaconda3",
+      "image_count": 3,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-15.md",
+      "status": "covered",
+      "review_note": "??, ????, ??, ?? ??? ??? ???."
+    },
+    {
+      "page": 16,
+      "title_guess": "安裝Pytorch, CUDA, MMCV version需要相互配合，如果無使用cpu來",
+      "image_count": 2,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-16.md",
+      "status": "covered",
+      "review_note": "??, ????, ??, ?? ??? ??? ???."
+    },
+    {
+      "page": 17,
+      "title_guess": "因為模型大小限制，在不外接Hyper RAM的情況下，只能使用2MB，因為",
+      "image_count": 2,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-17.md",
+      "status": "covered",
+      "review_note": "??, ????, ??, ?? ??? ??? ???."
+    },
+    {
+      "page": 18,
+      "title_guess": "資料結構按照下列分為",
+      "image_count": 4,
+      "asset_ids": [
+        "dataset-structure"
+      ],
+      "asset_files": [
+        "dataset-structure.png"
+      ],
+      "file": "pages/page-18.md",
+      "status": "covered",
+      "review_note": "??, ????, ??, ?? ??? ??? ???."
+    },
+    {
+      "page": 19,
+      "title_guess": "主要調整圖片大小、class數量、執行的epoch次數。",
+      "image_count": 3,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-19.md",
+      "status": "covered",
+      "review_note": "??, ????, ??, ?? ??? ??? ???."
+    },
+    {
+      "page": 20,
+      "title_guess": "轉換成ONNX後續再轉換成要使用的模型框架",
+      "image_count": 2,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-20.md",
+      "status": "covered",
+      "review_note": "??, ????, ??, ?? ??? ??? ???."
+    },
+    {
+      "page": 21,
+      "title_guess": "透過ONNX轉成要使用的模型框架(TFlite)",
+      "image_count": 2,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-21.md",
+      "status": "covered",
+      "review_note": "??, ????, ??, ?? ??? ??? ???."
+    },
+    {
+      "page": 22,
+      "title_guess": "使用vela complier",
+      "image_count": 2,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-22.md",
+      "status": "covered",
+      "review_note": "??, ????, ??, ?? ??? ??? ???."
+    },
+    {
+      "page": 23,
+      "title_guess": "看訓練出來每一個class的效果，包含各個class的準確率(AP，Average Precision)，",
+      "image_count": 3,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-23.md",
+      "status": "covered",
+      "review_note": "??, ????, ??, ?? ??? ??? ???."
+    },
+    {
+      "page": 24,
+      "title_guess": "測試所有的照片集(單張亦可)",
+      "image_count": 2,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-24.md",
+      "status": "covered",
+      "review_note": "??, ????, ??, ?? ??? ??? ???."
+    },
+    {
+      "page": 25,
+      "title_guess": "(一) 軟體流程",
+      "image_count": 2,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-25.md",
+      "status": "covered",
+      "review_note": "????? ?? ??? ?? ??? ???."
+    },
+    {
+      "page": 26,
+      "title_guess": "1. 系統初始化(System Initialization)",
+      "image_count": 2,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-26.md",
+      "status": "covered",
+      "review_note": "System Initialization ??? ???."
+    },
+    {
+      "page": 27,
+      "title_guess": "3. 模型推論(Model Inference)",
+      "image_count": 2,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-27.md",
+      "status": "covered",
+      "review_note": "?? ?? ?? ??? ???."
+    },
+    {
+      "page": 28,
+      "title_guess": "重點功能概述(BoardInit.cpp & mpu_config_M55M1.h) :",
+      "image_count": 3,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-28.md",
+      "status": "covered",
+      "review_note": "BoardInit ??? ??? ?? ?? ??? ???."
+    },
+    {
+      "page": 29,
+      "title_guess": "1. 系統時鐘與模組時鐘初始化",
+      "image_count": 3,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-29.md",
+      "status": "covered",
+      "review_note": "BoardInit ??? ??? ?? ?? ??? ???."
+    },
+    {
+      "page": 30,
+      "title_guess": "2. UART 初始化：",
+      "image_count": 4,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-30.md",
+      "status": "covered",
+      "review_note": "BoardInit ??? ??? ?? ?? ??? ???."
+    },
+    {
+      "page": 31,
+      "title_guess": "4. Arm Ethos-U NPU 初始化：",
+      "image_count": 4,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-31.md",
+      "status": "covered",
+      "review_note": "BoardInit ??? ??? ?? ?? ??? ???."
+    },
+    {
+      "page": 32,
+      "title_guess": "重點功能概述(inferenceTask.cpp)",
+      "image_count": 3,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-32.md",
+      "status": "covered",
+      "review_note": "InferenceTask ??? ???."
+    },
+    {
+      "page": 33,
+      "title_guess": "1. 推論以及執行",
+      "image_count": 4,
+      "asset_ids": [
+        "inference-run"
+      ],
+      "asset_files": [
+        "inference-run.png"
+      ],
+      "file": "pages/page-33.md",
+      "status": "covered",
+      "review_note": "RunInference ???? ??? ???."
+    },
+    {
+      "page": 34,
+      "title_guess": "2. FreeRTOS 的多任務架構",
+      "image_count": 3,
+      "asset_ids": [
+        "freertos-queue"
+      ],
+      "asset_files": [
+        "freertos-queue.png"
+      ],
+      "file": "pages/page-34.md",
+      "status": "covered",
+      "review_note": "FreeRTOS ? ?? ???? ??? ???."
+    },
+    {
+      "page": 35,
+      "title_guess": "重點功能介紹",
+      "image_count": 3,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-35.md",
+      "status": "covered",
+      "review_note": "DetectorPostProcessing ??? ????, NMS, ?? ?? ???? ???."
+    },
+    {
+      "page": 36,
+      "title_guess": "1. 後處理初始化",
+      "image_count": 3,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-36.md",
+      "status": "covered",
+      "review_note": "DetectorPostProcessing ??? ????, NMS, ?? ?? ???? ???."
+    },
+    {
+      "page": 37,
+      "title_guess": "2. 執行後處理",
+      "image_count": 4,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-37.md",
+      "status": "covered",
+      "review_note": "DetectorPostProcessing ??? ????, NMS, ?? ?? ???? ???."
+    },
+    {
+      "page": 38,
+      "title_guess": "3. 偵測框解析與篩選",
+      "image_count": 4,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-38.md",
+      "status": "covered",
+      "review_note": "DetectorPostProcessing ??? ????, NMS, ?? ?? ???? ???."
+    },
+    {
+      "page": 39,
+      "title_guess": "5. 轉換至原始影像尺寸",
+      "image_count": 4,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-39.md",
+      "status": "covered",
+      "review_note": "DetectorPostProcessing ??? ????, NMS, ?? ?? ???? ???."
+    },
+    {
+      "page": 40,
+      "title_guess": "",
+      "image_count": 2,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-40.md",
+      "status": "covered",
+      "review_note": "Main ??, ?? ??, ??? ?? ??? ??? ???."
+    },
+    {
+      "page": 41,
+      "title_guess": "",
+      "image_count": 3,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-41.md",
+      "status": "covered",
+      "review_note": "Main ??, ?? ??, ??? ?? ??? ??? ???."
+    },
+    {
+      "page": 42,
+      "title_guess": "1. 影像緩衝區管理:",
+      "image_count": 4,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-42.md",
+      "status": "covered",
+      "review_note": "Main ??, ?? ??, ??? ?? ??? ??? ???."
+    },
+    {
+      "page": 43,
+      "title_guess": "3. 輸入影像處理",
+      "image_count": 4,
+      "asset_ids": [
+        "image-scale"
+      ],
+      "asset_files": [
+        "image-scale.png"
+      ],
+      "file": "pages/page-43.md",
+      "status": "covered",
+      "review_note": "?? ??? ???? ?? ???? ???."
+    },
+    {
+      "page": 44,
+      "title_guess": "5. 後處理與結果呈現",
+      "image_count": 4,
+      "asset_ids": [
+        "draw-box"
+      ],
+      "asset_files": [
+        "draw-box.png"
+      ],
+      "file": "pages/page-44.md",
+      "status": "covered",
+      "review_note": "?? ??? ?? ???? ???."
+    },
+    {
+      "page": 45,
+      "title_guess": "Link",
+      "image_count": 3,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-45.md",
+      "status": "covered",
+      "review_note": "DEMO ??? ???."
+    },
+    {
+      "page": 46,
+      "title_guess": "",
+      "image_count": 3,
+      "asset_ids": [],
+      "asset_files": [],
+      "file": "pages/page-46.md",
+      "status": "covered",
+      "review_note": "?? ???? ?? ?? ?? ??? ??."
+    }
+  ]
+}
